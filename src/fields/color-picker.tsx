@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import type { CustomFieldProps } from '../types';
 import { cn } from '../utils/cn';
 
@@ -16,16 +16,7 @@ export function ColorPickerField({
 	readOnly = false,
 	className,
 }: ColorPickerFieldProps): JSX.Element {
-	const [localValue, setLocalValue] = useState<string>(
-		(value as string) || '#000000'
-	);
 	const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
-
-	useEffect(() => {
-		if (value) {
-			setLocalValue(value as string);
-		}
-	}, [value]);
 
 	const displayColor = useMemo(() => {
 		if (!value) return '#000000';
@@ -70,11 +61,9 @@ export function ColorPickerField({
 			} else {
 				onChange(newColor);
 			}
-			setLocalValue(newColor);
 			setIsColorPickerOpen(false);
 		} catch {
 			onChange(newColor);
-			setLocalValue(newColor);
 			setIsColorPickerOpen(false);
 		}
 	};

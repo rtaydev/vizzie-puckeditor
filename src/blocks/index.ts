@@ -83,6 +83,10 @@ export const defaultBlocks: Config['components'] = {
 	},
 	Container: {
 		fields: {
+			content: {
+				type: 'slot',
+				label: 'Content',
+			},
 			padding: {
 				type: 'select',
 				label: 'Padding',

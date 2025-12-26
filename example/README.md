@@ -20,12 +20,29 @@ This is an example Next.js application demonstrating how to use `@puck-editor/ne
    npm install
    ```
 
-4. Run the development server:
+4. Set up the database:
+   ```bash
+   npm run setup:db
+   ```
+   This creates a SQLite database in the `data/` directory.
+
+5. Run the development server:
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Database
+
+This example uses SQLite to persist content. The database file is stored in `data/content.db`.
+
+- **Setup**: Run `npm run setup:db` to initialize the database
+- **Location**: `data/content.db` (created automatically on first use)
+- **Persistence**: Content is saved when you click "Publish" in the editor
+- **Viewing**: Published content appears on the `/renderer` page
+
+The database schema is automatically created when the app starts. You can also manually run the setup script.
 
 ## Example Pages
 
