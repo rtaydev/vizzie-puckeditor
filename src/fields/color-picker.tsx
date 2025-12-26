@@ -84,7 +84,7 @@ export function ColorPickerField({
 					onClick={() => !readOnly && setIsColorPickerOpen(!isColorPickerOpen)}
 					disabled={readOnly}
 					className={cn(
-						'p-0 bg-white h-8 w-full rounded-sm shadow-sm border border-gray-200 hover:border-gray-300 transition-colors',
+						'p-0 bg-white h-8 w-full rounded-sm shadow-xs border border-gray-200 hover:border-gray-300 transition-colors',
 						readOnly && 'cursor-not-allowed opacity-50'
 					)}
 				>
@@ -109,7 +109,7 @@ export function ColorPickerField({
 								value={displayColor}
 								onChange={(e) => handleColorChange(e.target.value)}
 								placeholder='#000000'
-								className='w-full h-8 px-2 text-xs border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
+								className='w-full h-8 px-2 text-xs border border-gray-300 rounded focus:outline-hidden focus:ring-2 focus:ring-blue-500'
 							/>
 						</div>
 					</div>

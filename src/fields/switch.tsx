@@ -28,7 +28,7 @@ export function SwitchField({
 				onClick={() => !readOnly && onChange(!isChecked)}
 				disabled={readOnly}
 				className={cn(
-					'relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
+					'relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
 					isChecked ? 'bg-blue-500' : 'bg-gray-300',
 					readOnly && 'cursor-not-allowed opacity-50'
 				)}

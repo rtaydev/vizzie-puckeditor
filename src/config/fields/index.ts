@@ -27,7 +27,7 @@ export const button = {
 			options: [
 				{ label: 'primary', value: 'default' },
 				{ label: 'secondary', value: 'secondary' },
-				{ label: 'outline', value: 'outline' },
+				{ label: 'outline-solid', value: 'outline-solid' },
 				{ label: 'ghost', value: 'ghost' },
 				{ label: 'link', value: 'link' },
 				{ label: 'destructive', value: 'destructive' },
@@ -78,7 +78,7 @@ export const badge = {
 				{ label: 'default', value: 'default' },
 				{ label: 'secondary', value: 'secondary' },
 				{ label: 'destructive', value: 'destructive' },
-				{ label: 'outline', value: 'outline' },
+				{ label: 'outline-solid', value: 'outline-solid' },
 			],
 		},
 	},
