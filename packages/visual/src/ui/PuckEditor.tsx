@@ -1,3 +1,5 @@
+'use client';
+
 import type { ReactElement } from 'react';
 import { Config, Puck } from '@measured/puck';
 import { createPuckConfig } from '../config/createPuckConfig';

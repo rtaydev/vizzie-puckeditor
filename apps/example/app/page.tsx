@@ -3,6 +3,8 @@
 import { PuckEditor } from '@puck-editor/visual';
 import { useState } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
 	const [data, setData] = useState<any>({ content: [], root: { props: {} } });
 

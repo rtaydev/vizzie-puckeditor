@@ -1,3 +1,5 @@
+'use client';
+
 import type { ReactElement } from 'react';
 import { Render, Config } from '@measured/puck';
 import { PuckRendererProps } from '../config/types';

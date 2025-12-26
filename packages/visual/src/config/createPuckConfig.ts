@@ -1,7 +1,8 @@
 import { PuckOptions } from './types';
+import type { Config } from '@measured/puck';
 
-export const createPuckConfig = (options: PuckOptions) => {
+export const createPuckConfig = (options: PuckOptions): Config => {
 	return {
-		sidebarPosition: options.sidebarPosition || 'left',
-	};
+		components: {},
+	} as Config;
 };
