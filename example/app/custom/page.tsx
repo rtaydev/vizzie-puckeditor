@@ -17,7 +17,7 @@ function CallToAction({
 	buttonLink: string;
 }): JSX.Element {
 	return (
-		<div className='bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 rounded-lg text-center'>
+		<div className='bg-linear-to-r from-blue-500 to-purple-600 text-white p-8 rounded-lg text-center'>
 			<h2 className='text-3xl font-bold mb-4'>{title}</h2>
 			<p className='text-lg mb-6 opacity-90'>{description}</p>
 			<a
