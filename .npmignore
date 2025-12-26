@@ -1,0 +1,8 @@
+src
+tsconfig.json
+tsup.config.ts
+tailwind.config.js
+.gitignore
+node_modules
+*.log
+

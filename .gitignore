@@ -1,0 +1,12 @@
+node_modules
+lib
+dist
+*.log
+.DS_Store
+.env
+.env.local
+.vercel
+.next
+example/.next
+example/node_modules
+

@@ -1,0 +1,63 @@
+{
+	"name": "@puck-editor/nextjs",
+	"version": "0.1.0",
+	"description": "A visual rich text editor for Next.js 16+ based on Puck Editor with custom fields, blocks, and types",
+	"main": "./lib/index.js",
+	"module": "./lib/index.mjs",
+	"types": "./lib/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./lib/index.d.ts",
+			"import": "./lib/index.mjs",
+			"require": "./lib/index.js"
+		},
+		"./server": {
+			"types": "./lib/server.d.ts",
+			"import": "./lib/server.mjs",
+			"require": "./lib/server.js"
+		},
+		"./styles": "./lib/styles/index.css"
+	},
+	"files": [
+		"lib",
+		"README.md"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"type-check": "tsc --noEmit",
+		"example:install": "cd example && npm install",
+		"example:dev": "cd example && npm run dev",
+		"example:build": "cd example && npm run build"
+	},
+	"keywords": [
+		"nextjs",
+		"puck",
+		"editor",
+		"visual-editor",
+		"cms",
+		"content-management",
+		"rich-text"
+	],
+	"author": "",
+	"license": "MIT",
+	"peerDependencies": {
+		"next": ">=16.0.0",
+		"react": ">=18.0.0",
+		"react-dom": ">=18.0.0"
+	},
+	"dependencies": {
+		"@measured/puck": "^0.20.2",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.0",
+		"tailwind-merge": "^2.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.0",
+		"@types/react": "^18.2.0",
+		"@types/react-dom": "^18.2.0",
+		"tailwindcss": "^3.4.0",
+		"tsup": "^8.0.0",
+		"typescript": "^5.3.0"
+	}
+}
