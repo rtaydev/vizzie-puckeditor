@@ -1,19 +1,21 @@
-import { ComponentConfig } from '@measured/puck';
-import { ALargeSmall, AlignLeft } from 'lucide-react';
+import { ComponentConfig, CustomField } from '@measured/puck';
+import { ALargeSmall, AlignLeft, Maximize } from 'lucide-react';
 import { Section } from '../../components/section';
 import { WithLayout, withLayout } from '../../components/layout';
 import {
 	sectionFields,
 	type SectionStyleProps,
 } from '../../config/sectionFields';
+import { ColorPickerField } from '../../fields/ColorPickerField';
+import { RemSliderField } from '../../fields/RemSliderField';
 
 export type TextProps = WithLayout<
 	SectionStyleProps & {
 		align: 'left' | 'center' | 'right';
 		text?: string;
 		padding?: string;
-		size?: 's' | 'm';
-		color: 'default' | 'muted';
+		size: number; // Size in rem units
+		color: string; // Hex color string from ColorPickerField
 		maxWidth?: string;
 	}
 >;
@@ -25,13 +27,14 @@ const TextInner: ComponentConfig<TextProps> = {
 			contentEditable: true,
 		},
 		size: {
-			type: 'select',
-			labelIcon: <ALargeSmall size={16} />,
-			options: [
-				{ label: 'S', value: 's' },
-				{ label: 'M', value: 'm' },
-			],
-		},
+			type: 'custom',
+			label: 'Size',
+			labelIcon: <Maximize size={16} />,
+			render: (props) => <RemSliderField {...props} />,
+			min: 0.5,
+			max: 4,
+			step: 0.1,
+		} as CustomField<number>,
 		align: {
 			type: 'radio',
 			labelIcon: <AlignLeft size={16} />,
@@ -42,20 +45,19 @@ const TextInner: ComponentConfig<TextProps> = {
 			],
 		},
 		color: {
-			type: 'radio',
-			options: [
-				{ label: 'Default', value: 'default' },
-				{ label: 'Muted', value: 'muted' },
-			],
-		},
+			type: 'custom',
+			label: 'Color',
+			render: (props) => <ColorPickerField {...props} />,
+			showInput: false, // Hide the hex input, show only the color picker button
+		} as CustomField<string>,
 		maxWidth: { type: 'text' },
 		...sectionFields,
 	},
 	defaultProps: {
 		align: 'left',
 		text: 'Text',
-		size: 'm',
-		color: 'default',
+		size: 1.25, // 1.25rem (equivalent to ~20px)
+		color: '#000000',
 	},
 	render: ({ align, color, text, size, maxWidth, sectionStyle }) => {
 		const backgroundColor =
@@ -74,11 +76,15 @@ const TextInner: ComponentConfig<TextProps> = {
 				<span
 					style={{
 						color:
-							color === 'default' ? 'inherit' : 'var(--puck-color-grey-05)',
+							!color || color === 'default'
+								? 'inherit'
+								: color === 'muted'
+								? 'var(--puck-color-grey-05)'
+								: color, // Use hex color from ColorPickerField
 						display: 'flex',
 						textAlign: align,
 						width: '100%',
-						fontSize: size === 'm' ? '20px' : '16px',
+						fontSize: size ? `${size}rem` : '1.25rem',
 						fontWeight: 300,
 						maxWidth,
 						justifyContent:

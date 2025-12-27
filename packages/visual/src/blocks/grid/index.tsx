@@ -15,10 +15,20 @@ export type GridProps = SectionStyleProps & {
 	numColumns: number;
 	gap: number;
 	items: Slot;
+	sidebarLayout?: 'none' | 'left' | 'right';
 };
 
 export const GridBlock: ComponentConfig<GridProps> = {
 	fields: {
+		sidebarLayout: {
+			type: 'radio',
+			label: 'Layout',
+			options: [
+				{ label: 'Reset', value: 'none' },
+				{ label: 'Left', value: 'left' },
+				{ label: 'Right', value: 'right' },
+			],
+		},
 		numColumns: {
 			type: 'number',
 			label: 'Cols',
@@ -39,17 +49,28 @@ export const GridBlock: ComponentConfig<GridProps> = {
 		numColumns: 4,
 		gap: 24,
 		items: [],
+		sidebarLayout: 'none',
 	},
-	render: ({ gap, numColumns, items: Items, sectionStyle }) => {
+	render: ({ gap, numColumns, items: Items, sectionStyle, sidebarLayout }) => {
 		const backgroundColor =
 			sectionStyle?.backgroundColor === 'custom'
 				? sectionStyle?.backgroundColorCustom
 				: sectionStyle?.backgroundColor;
 
+		// Calculate gridTemplateColumns based on sidebar layout
+		let gridTemplateColumns: string;
+		if (sidebarLayout === 'left') {
+			gridTemplateColumns = '1fr 3fr'; // Sidebar on left (25% / 75%)
+		} else if (sidebarLayout === 'right') {
+			gridTemplateColumns = '3fr 1fr'; // Sidebar on right (75% / 25%)
+		} else {
+			gridTemplateColumns = `repeat(${numColumns}, 1fr)`;
+		}
+
 		const gridStyle: CSSProperties = {
 			display: 'grid',
 			gap: `${gap}px`,
-			gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
+			gridTemplateColumns,
 			width: '100%',
 		};
 

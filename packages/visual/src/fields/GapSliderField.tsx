@@ -1,6 +1,7 @@
 'use client';
 
 import type { CustomFieldRender } from '@measured/puck';
+import { Maximize } from 'lucide-react';
 
 export const GapSliderField: CustomFieldRender<number> = (props) => {
 	const { value = 0, onChange, field } = props;
@@ -8,19 +9,31 @@ export const GapSliderField: CustomFieldRender<number> = (props) => {
 	const max = (field as any).max ?? 100;
 
 	return (
-		<div>
+		<div
+			style={{
+				width: '100%',
+				display: 'flex',
+				flexDirection: 'row',
+				gap: '8px',
+				alignItems: 'center',
+			}}
+		>
 			<label
 				style={{
-					display: 'block',
-					marginBottom: '6px',
+					display: 'flex',
+					alignItems: 'center',
+					gap: '8px',
 					fontSize: '12px',
 					fontWeight: '500',
 					color: '#6b7280',
 				}}
 			>
+				<Maximize size={16} />
 				{field.label || 'Gap'}
 			</label>
-			<div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+			<div
+				style={{ display: 'flex', gap: '12px', alignItems: 'center', flex: 1 }}
+			>
 				<input
 					type='range'
 					min={min}
@@ -38,7 +51,7 @@ export const GapSliderField: CustomFieldRender<number> = (props) => {
 				/>
 				<span
 					style={{
-						minWidth: '50px',
+						minWidth: '20px',
 						fontSize: '12px',
 						color: '#6b7280',
 						textAlign: 'right',
@@ -50,4 +63,3 @@ export const GapSliderField: CustomFieldRender<number> = (props) => {
 		</div>
 	);
 };
-

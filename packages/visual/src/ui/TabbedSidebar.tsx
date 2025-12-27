@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { Puck } from '@measured/puck';
+import { useState, useEffect } from 'react';
+import { Puck, createUsePuck } from '@measured/puck';
+
+const usePuck = createUsePuck();
 
 type Tab = 'components' | 'fields' | 'outline';
 
@@ -13,6 +15,14 @@ const tabs: { id: Tab; label: string }[] = [
 
 export const TabbedSidebar = () => {
 	const [activeTab, setActiveTab] = useState<Tab>('components');
+	const selectedItem = usePuck((s) => s.selectedItem);
+
+	// Switch to fields tab when a block is selected
+	useEffect(() => {
+		if (selectedItem && activeTab !== 'fields') {
+			setActiveTab('fields');
+		}
+	}, [selectedItem, activeTab]);
 
 	return (
 		<div

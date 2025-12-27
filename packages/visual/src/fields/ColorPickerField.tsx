@@ -5,8 +5,13 @@ import type { CustomFieldRender } from '@measured/puck';
 import { Palette } from 'lucide-react';
 import { ChromePicker, type ColorResult } from 'react-color';
 
+type ColorPickerFieldProps = Parameters<CustomFieldRender<string>>[0] & {
+	showInput?: boolean;
+};
+
 export const ColorPickerField: CustomFieldRender<string> = (props) => {
 	const { value = '', onChange, field } = props;
+	const showInput = (field as any)?.showInput !== false; // Default to true if not specified
 	const [showPicker, setShowPicker] = useState(false);
 	const [hexValue, setHexValue] = useState(value || '#000000');
 
@@ -165,12 +170,12 @@ export const ColorPickerField: CustomFieldRender<string> = (props) => {
 				}}
 			>
 				{/* Color preview and picker */}
-				<div style={{ position: 'relative' }}>
+				<div style={{ position: 'relative', flex: 1 }}>
 					<button
 						type='button'
 						onClick={() => setShowPicker(!showPicker)}
 						style={{
-							width: '40px',
+							width: showInput ? '40px' : '100%',
 							height: '40px',
 							border: '2px solid #e5e7eb',
 							borderRadius: '6px',
@@ -249,24 +254,26 @@ export const ColorPickerField: CustomFieldRender<string> = (props) => {
 					)}
 				</div>
 
-				{/* Hex input */}
-				<div style={{ flex: 1 }}>
-					<input
-						type='text'
-						value={hexValue}
-						onChange={handleHexInputChange}
-						onBlur={handleHexInputBlur}
-						placeholder='#000000 or #000000FF'
-						style={{
-							width: '100%',
-							padding: '8px 12px',
-							border: '1px solid #d1d5db',
-							borderRadius: '6px',
-							fontSize: '14px',
-							fontFamily: 'monospace',
-						}}
-					/>
-				</div>
+				{/* Hex input - conditionally rendered */}
+				{showInput && (
+					<div style={{ flex: 1 }}>
+						<input
+							type='text'
+							value={hexValue}
+							onChange={handleHexInputChange}
+							onBlur={handleHexInputBlur}
+							placeholder='#000000 or #000000FF'
+							style={{
+								width: '100%',
+								padding: '8px 12px',
+								border: '1px solid #d1d5db',
+								borderRadius: '6px',
+								fontSize: '14px',
+								fontFamily: 'monospace',
+							}}
+						/>
+					</div>
+				)}
 			</div>
 
 			{/* Close picker when clicking outside */}
