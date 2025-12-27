@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { CustomFieldRender } from '@measured/puck';
 import { Palette } from 'lucide-react';
 import { ChromePicker, type ColorResult } from 'react-color';
@@ -14,6 +14,12 @@ export const ColorPickerField: CustomFieldRender<string> = (props) => {
 	const showInput = (field as any)?.showInput !== false; // Default to true if not specified
 	const [showPicker, setShowPicker] = useState(false);
 	const [hexValue, setHexValue] = useState(value || '#000000');
+	const buttonRef = useRef<HTMLButtonElement>(null);
+	const pickerRef = useRef<HTMLDivElement>(null);
+	const [pickerPosition, setPickerPosition] = useState<{
+		top: number;
+		left: number;
+	} | null>(null);
 
 	// Convert rgba to hex with alpha
 	const rgbaToHex = (r: number, g: number, b: number, a: number): string => {
@@ -148,6 +154,67 @@ export const ColorPickerField: CustomFieldRender<string> = (props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
+	// Calculate picker position to keep it on screen
+	useEffect(() => {
+		if (showPicker && buttonRef.current) {
+			const calculatePosition = () => {
+				if (!buttonRef.current) return;
+
+				const buttonRect = buttonRef.current.getBoundingClientRect();
+				const pickerWidth = 225; // ChromePicker default width
+				const pickerHeight = 300; // ChromePicker approximate height
+				const padding = 8; // Padding from edges
+
+				let top = buttonRect.bottom + padding;
+				let left = buttonRect.right - pickerWidth;
+
+				// Check if picker would go off bottom of screen
+				if (top + pickerHeight > window.innerHeight) {
+					top = buttonRect.top - pickerHeight - padding;
+					// If still off screen, position at bottom with padding
+					if (top < padding) {
+						top = window.innerHeight - pickerHeight - padding;
+					}
+				}
+
+				// Check if picker would go off right of screen
+				if (left + pickerWidth > window.innerWidth - padding) {
+					left = window.innerWidth - pickerWidth - padding;
+				}
+
+				// Check if picker would go off left of screen
+				if (left < padding) {
+					left = padding;
+				}
+
+				// Ensure top is not negative
+				if (top < padding) {
+					top = padding;
+				}
+
+				setPickerPosition({ top, left });
+			};
+
+			// Calculate position immediately
+			calculatePosition();
+
+			// Recalculate after a short delay to ensure DOM is ready
+			const timeoutId = setTimeout(calculatePosition, 0);
+
+			// Recalculate on window resize
+			window.addEventListener('resize', calculatePosition);
+			window.addEventListener('scroll', calculatePosition, true);
+
+			return () => {
+				clearTimeout(timeoutId);
+				window.removeEventListener('resize', calculatePosition);
+				window.removeEventListener('scroll', calculatePosition, true);
+			};
+		} else {
+			setPickerPosition(null);
+		}
+	}, [showPicker]);
+
 	return (
 		<div>
 			<label
@@ -172,6 +239,7 @@ export const ColorPickerField: CustomFieldRender<string> = (props) => {
 				{/* Color preview and picker */}
 				<div style={{ position: 'relative', flex: 1 }}>
 					<button
+						ref={buttonRef}
 						type='button'
 						onClick={() => setShowPicker(!showPicker)}
 						style={{
@@ -238,11 +306,13 @@ export const ColorPickerField: CustomFieldRender<string> = (props) => {
 					</button>
 					{showPicker && (
 						<div
+							ref={pickerRef}
 							style={{
-								position: 'absolute',
-								top: '48px',
-								right: 0,
+								position: 'fixed',
+								top: pickerPosition ? `${pickerPosition.top}px` : '-9999px',
+								left: pickerPosition ? `${pickerPosition.left}px` : '-9999px',
 								zIndex: 1000,
+								visibility: pickerPosition ? 'visible' : 'hidden',
 							}}
 							onClick={(e) => e.stopPropagation()}
 						>

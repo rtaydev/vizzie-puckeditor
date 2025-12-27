@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import '@measured/puck/puck.css';
 import '@puck-editor/visual/styles.css';
 import '@puck-editor/visual/index.css';
 

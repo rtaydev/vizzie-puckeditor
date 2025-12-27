@@ -27,7 +27,6 @@
 		"lint": "eslint ."
 	},
 	"peerDependencies": {
-		"@measured/puck": "^0.20.2",
 		"react": ">=18",
 		"react-dom": ">=18"
 	},
@@ -41,6 +40,7 @@
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
+		"@measured/puck": "^0.20.2",
 		"@types/react-color": "^3.0.13",
 		"lucide-react": "^0.562.0",
 		"react-color": "^2.19.3"

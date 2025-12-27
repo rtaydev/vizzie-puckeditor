@@ -1,8 +1,51 @@
 @import '@measured/puck/puck.css';
 
 @theme {
-	--font-sans: 'Inter', sans-serif;
-	--font-mono: 'Inter', monospace;
+	--font-sans: var(--puck-font-sans, 'Inter', sans-serif);
+	--font-mono: var(--puck-font-mono, 'Inter', monospace);
+}
+
+:root {
+	--puck-color-primary: #3b82f6;
+	--puck-color-secondary: #6366f1;
+	--puck-color-background: #ffffff;
+	--puck-color-background-secondary: #f9fafb;
+	--puck-color-background-tertiary: #f3f4f6;
+	--puck-color-text: #1f2937;
+	--puck-color-text-secondary: #6b7280;
+	--puck-color-text-tertiary: #9ca3af;
+	--puck-color-border: #e5e7eb;
+	--puck-color-border-secondary: #d1d5db;
+	--puck-color-border-tertiary: #9ca3af;
+	--puck-color-button-primary: blueviolet;
+	--puck-color-button-primary-text: white;
+	--puck-color-button-secondary: #f0f0f0;
+	--puck-color-button-secondary-text: #000000;
+	--puck-color-input-background: #f9fafb;
+	--puck-color-input-border: #e5e7eb;
+	--puck-color-input-text: #1f2937;
+	--puck-color-preview-background: #ffffff;
+	--puck-color-header-background: #ffffff;
+	--puck-color-header-border: #e5e7eb;
+	--puck-font-sans: 'Inter', sans-serif;
+	--puck-font-mono: 'Inter', monospace;
+	--puck-font-size-base: 14px;
+	--puck-font-size-small: 12px;
+	--puck-font-size-large: 16px;
+	--puck-font-weight-normal: 400;
+	--puck-font-weight-medium: 500;
+	--puck-font-weight-bold: 700;
+	--puck-spacing-xs: 4px;
+	--puck-spacing-sm: 8px;
+	--puck-spacing-md: 16px;
+	--puck-spacing-lg: 24px;
+	--puck-spacing-xl: 32px;
+	--puck-border-radius-sm: 4px;
+	--puck-border-radius-md: 8px;
+	--puck-border-radius-lg: 12px;
+	--puck-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	--puck-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+	--puck-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 [class*='_PuckFields-'] [class*='_InputWrapper_'] [class*='_Input_'] {
@@ -10,18 +53,18 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	gap: 8px;
+	gap: var(--puck-spacing-sm);
 
 	[class*='_Input-label_'] {
 		padding-bottom: 0;
 	}
 	[class*='_Input-input_'] {
-		font-size: 12px;
-		padding: 4px 8px;
-		border-radius: 4px;
-		border: 1px solid #e5e7eb;
-		background: #f9fafb;
-		color: #1f2937;
+		font-size: var(--puck-font-size-small);
+		padding: var(--puck-spacing-xs) var(--puck-spacing-sm);
+		border-radius: var(--puck-border-radius-sm);
+		border: 1px solid var(--puck-color-input-border);
+		background: var(--puck-color-input-background);
+		color: var(--puck-color-input-text);
 		transition: all 0.2s ease-in-out;
 		&:focus {
 			outline: none;

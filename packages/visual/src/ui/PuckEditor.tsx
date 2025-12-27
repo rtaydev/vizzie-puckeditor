@@ -16,6 +16,8 @@ import {
 import { PuckRenderer } from '../render/PuckRenderer';
 import { ArrowLeft, File, Save } from 'lucide-react';
 import GridActionBar from '../activebars/grid';
+import { defaultPuckTheme } from '../config/defaultTheme';
+import { applyTheme, mergeThemes } from '../utils/theme';
 
 const DEFAULT_LOCAL_STORAGE_KEY = 'puck-editor-data';
 const ACTION_TYPE_SET_DATA = 'setData';
@@ -39,6 +41,17 @@ export const PuckEditor = ({
 
 	const enableLocalStorage = options.enableLocalStorage ?? false;
 	const localStorageKey = options.localStorageKey || DEFAULT_LOCAL_STORAGE_KEY;
+
+	const theme = useMemo(() => {
+		if (options.theme?.theme) {
+			return mergeThemes(defaultPuckTheme, options.theme.theme);
+		}
+		return defaultPuckTheme;
+	}, [options.theme]);
+
+	const themeStyles = useMemo(() => applyTheme(theme), [theme]);
+	const themeClassName = options.theme?.className || '';
+	const customCss = options.theme?.customCss;
 
 	useEffect(() => {
 		if (!isInternalUpdateRef.current) {
@@ -109,10 +122,10 @@ export const PuckEditor = ({
 			display: 'flex' as const,
 			alignItems: 'center' as const,
 			justifyContent: 'flex-end' as const,
-			gap: 16,
-			padding: '12px 16px',
-			borderBottom: '1px solid #e5e7eb',
-			background: '#ffffff',
+			gap: 'var(--puck-spacing-md)',
+			padding: '12px var(--puck-spacing-md)',
+			borderBottom: '1px solid var(--puck-color-header-border)',
+			background: 'var(--puck-color-header-background)',
 		}),
 		[]
 	);
@@ -122,9 +135,9 @@ export const PuckEditor = ({
 			display: 'flex' as const,
 			alignItems: 'center' as const,
 			justifyContent: 'space-between' as const,
-			padding: '12px 16px',
-			borderBottom: '1px solid #e5e7eb',
-			background: '#ffffff',
+			padding: '12px var(--puck-spacing-md)',
+			borderBottom: '1px solid var(--puck-color-header-border)',
+			background: 'var(--puck-color-header-background)',
 		}),
 		[]
 	);
@@ -133,10 +146,10 @@ export const PuckEditor = ({
 		() => ({
 			display: 'flex' as const,
 			alignItems: 'center' as const,
-			gap: 8,
-			fontSize: 12,
-			padding: '4px 8px',
-			borderRadius: 4,
+			gap: 'var(--puck-spacing-sm)',
+			fontSize: 'var(--puck-font-size-small)',
+			padding: 'var(--puck-spacing-xs) var(--puck-spacing-sm)',
+			borderRadius: 'var(--puck-border-radius-sm)',
 			border: 'none' as const,
 			cursor: 'pointer' as const,
 		}),
@@ -146,8 +159,8 @@ export const PuckEditor = ({
 	const previewButtonStyle = useMemo(
 		() => ({
 			...buttonBaseStyle,
-			color: '#000000',
-			background: '#f0f0f0',
+			color: 'var(--puck-color-button-secondary-text)',
+			background: 'var(--puck-color-button-secondary)',
 		}),
 		[buttonBaseStyle]
 	);
@@ -155,8 +168,8 @@ export const PuckEditor = ({
 	const saveButtonStyle = useMemo(
 		() => ({
 			...buttonBaseStyle,
-			color: 'white',
-			background: 'blueviolet',
+			color: 'var(--puck-color-button-primary-text)',
+			background: 'var(--puck-color-button-primary)',
 		}),
 		[buttonBaseStyle]
 	);
@@ -164,10 +177,11 @@ export const PuckEditor = ({
 	const editorGridStyle = useMemo(
 		() => ({
 			display: 'grid' as const,
-			gridTemplateColumns: '1fr 320px',
-			gridGap: 16,
+			gridTemplateColumns:
+				options.sidebarPosition === 'left' ? '320px 1fr' : '1fr 320px',
+			gridGap: 'var(--puck-spacing-md)',
 		}),
-		[]
+		[options.sidebarPosition]
 	);
 
 	const puckProps = useMemo(
@@ -186,8 +200,22 @@ export const PuckEditor = ({
 		[config, currentData, handleChange, handleAction, handlePublish]
 	);
 
+	const rootStyle = useMemo(
+		() => ({
+			...themeStyles,
+		}),
+		[themeStyles]
+	);
+
 	return (
-		<>
+		<div style={rootStyle} className={themeClassName}>
+			{customCss && (
+				<style
+					dangerouslySetInnerHTML={{
+						__html: customCss,
+					}}
+				/>
+			)}
 			{!showPreview ? (
 				<Puck {...puckProps}>
 					<header style={headerStyle}>
@@ -206,8 +234,13 @@ export const PuckEditor = ({
 						</button>
 					</header>
 					<div style={editorGridStyle}>
+						{options.sidebarPosition === 'left' ? (
+							<TabbedSidebar options={options} />
+						) : null}
 						<Puck.Preview />
-						<TabbedSidebar />
+						{options.sidebarPosition === 'right' ? (
+							<TabbedSidebar options={options} />
+						) : null}
 					</div>
 				</Puck>
 			) : (
@@ -226,6 +259,6 @@ export const PuckEditor = ({
 					<PuckRenderer data={previewData} options={options} />
 				</div>
 			)}
-		</>
+		</div>
 	);
 };

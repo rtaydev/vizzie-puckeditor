@@ -1,0 +1,55 @@
+import type { PuckTheme } from './types';
+
+export const defaultPuckTheme: PuckTheme = {
+	colors: {
+		primary: '#3b82f6',
+		secondary: '#6366f1',
+		background: '#ffffff',
+		backgroundSecondary: '#f9fafb',
+		backgroundTertiary: '#f3f4f6',
+		text: '#1f2937',
+		textSecondary: '#6b7280',
+		textTertiary: '#9ca3af',
+		border: '#e5e7eb',
+		borderSecondary: '#d1d5db',
+		borderTertiary: '#9ca3af',
+		buttonPrimary: 'blueviolet',
+		buttonPrimaryText: 'white',
+		buttonSecondary: '#f0f0f0',
+		buttonSecondaryText: '#000000',
+		inputBackground: '#f9fafb',
+		inputBorder: '#e5e7eb',
+		inputText: '#1f2937',
+		previewBackground: '#ffffff',
+		headerBackground: '#ffffff',
+		headerBorder: '#e5e7eb',
+	},
+	typography: {
+		fontSans: "'Inter', sans-serif",
+		fontMono: "'Inter', monospace",
+		fontSizeBase: '14px',
+		fontSizeSmall: '12px',
+		fontSizeLarge: '16px',
+		fontWeightNormal: '400',
+		fontWeightMedium: '500',
+		fontWeightBold: '700',
+	},
+	spacing: {
+		xs: '4px',
+		sm: '8px',
+		md: '16px',
+		lg: '24px',
+		xl: '32px',
+	},
+	borderRadius: {
+		sm: '4px',
+		md: '8px',
+		lg: '12px',
+	},
+	shadows: {
+		sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+		md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+		lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+	},
+};
+

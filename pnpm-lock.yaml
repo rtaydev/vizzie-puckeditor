@@ -10,9 +10,6 @@ importers:
 
   apps/example:
     dependencies:
-      '@measured/puck':
-        specifier: ^0.20.2
-        version: 0.20.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@puck-editor/visual':
         specifier: workspace:*
         version: link:../../packages/visual

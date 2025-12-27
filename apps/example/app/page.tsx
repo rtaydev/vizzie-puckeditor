@@ -1,7 +1,12 @@
 'use client';
 
-import { PuckEditor } from '@puck-editor/visual';
-import { useState, useEffect } from 'react';
+import {
+	PuckEditor,
+	defaultPuckTheme,
+	mergeThemes,
+	type PuckTheme,
+} from '@puck-editor/visual';
+import { useState, useEffect, useMemo } from 'react';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,6 +41,18 @@ export default function Home() {
 		setData(next);
 	};
 
+	// Example: Custom theme extending the default theme
+	const customTheme = useMemo(
+		() =>
+			mergeThemes(defaultPuckTheme, {
+				colors: {
+					primary: '#6366f1',
+					buttonPrimary: '#6366f1',
+				},
+			} as Partial<PuckTheme>),
+		[]
+	);
+
 	if (!isLoaded) {
 		return (
 			<div
@@ -52,7 +69,7 @@ export default function Home() {
 	}
 
 	return (
-		<div>
+		<div className='h-screen'>
 			<PuckEditor
 				data={data}
 				onPublish={handlePublish}
@@ -60,6 +77,10 @@ export default function Home() {
 					sidebarPosition: 'left',
 					enableLocalStorage: true,
 					localStorageKey: STORAGE_KEY,
+					theme: {
+						theme: customTheme,
+						className: 'my-custom-puck-editor',
+					},
 				}}
 			/>
 		</div>

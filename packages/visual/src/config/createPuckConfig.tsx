@@ -5,6 +5,7 @@ import { GridBlock } from '../blocks/grid';
 import { FlexBlock } from '../blocks/flex';
 import { TextBlock } from '../blocks/text';
 import { ImageBlock } from '../blocks/image';
+import { IconBlock } from '../blocks/icon';
 
 export const createPuckConfig = (options: PuckOptions): Config => {
 	return {
@@ -14,6 +15,7 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 			FlexBlock,
 			TextBlock,
 			ImageBlock,
+			IconBlock,
 		},
 		categories: {
 			typography: {
@@ -23,7 +25,7 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 				components: ['GridBlock', 'FlexBlock'],
 			},
 			media: {
-				components: ['ImageBlock'],
+				components: ['ImageBlock', 'IconBlock'],
 			},
 		},
 	} as unknown as Config;

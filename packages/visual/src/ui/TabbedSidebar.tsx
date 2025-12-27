@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Puck, createUsePuck } from '@measured/puck';
+import { PuckOptions } from '../config/types';
 
 const usePuck = createUsePuck();
 
@@ -13,16 +14,28 @@ const tabs: { id: Tab; label: string }[] = [
 	{ id: 'outline', label: 'Outline' },
 ];
 
-export const TabbedSidebar = () => {
+export const TabbedSidebar = ({ options }: { options: PuckOptions }) => {
 	const [activeTab, setActiveTab] = useState<Tab>('components');
 	const selectedItem = usePuck((s) => s.selectedItem);
+	const previousSelectedItem = useRef<any>(selectedItem);
+	const [hasManuallyChangedTab, setHasManuallyChangedTab] = useState(false);
 
-	// Switch to fields tab when a block is selected
+	// Switch to fields tab when a block is selected unless the user has manually changed the tab
 	useEffect(() => {
-		if (selectedItem && activeTab !== 'fields') {
-			setActiveTab('fields');
+		if (previousSelectedItem.current !== selectedItem) {
+			previousSelectedItem.current = selectedItem;
+			setHasManuallyChangedTab(false);
 		}
-	}, [selectedItem, activeTab]);
+		if (selectedItem && activeTab !== 'fields' && !hasManuallyChangedTab) {
+			setActiveTab('fields');
+			setHasManuallyChangedTab(true);
+		}
+	}, [selectedItem, activeTab, hasManuallyChangedTab]);
+
+	const handleTabChange = (tab: Tab) => {
+		setActiveTab(tab);
+		setHasManuallyChangedTab(true);
+	};
 
 	return (
 		<div
@@ -30,6 +43,13 @@ export const TabbedSidebar = () => {
 				display: 'flex',
 				flexDirection: 'column',
 				background: '#ffffff',
+				...(options.sidebarPosition === 'left'
+					? {
+							borderRight: '1px solid #e5e7eb',
+					  }
+					: {
+							borderLeft: '1px solid #e5e7eb',
+					  }),
 			}}
 		>
 			<div
@@ -43,7 +63,7 @@ export const TabbedSidebar = () => {
 					<button
 						key={tab.id}
 						type='button'
-						onClick={() => setActiveTab(tab.id)}
+						onClick={() => handleTabChange(tab.id)}
 						style={{
 							flex: 1,
 							padding: '12px 16px',
@@ -68,6 +88,7 @@ export const TabbedSidebar = () => {
 				style={{
 					flex: 1,
 					overflowY: 'auto',
+					margin: '8px',
 				}}
 			>
 				{activeTab === 'components' && <Puck.Components />}
