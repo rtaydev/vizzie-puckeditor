@@ -1,4 +1,5 @@
 import type { ComponentConfig } from '@measured/puck';
+import { useMemo } from 'react';
 import { withLayout, type WithLayout } from '../../components/layout';
 import { Section } from '../../components/section';
 import {
@@ -9,7 +10,6 @@ import {
 	sectionFields,
 	type SectionStyleProps,
 } from '../../config/sectionFields';
-import { useRef } from 'react';
 
 export type HeadingProps = WithLayout<
 	SectionStyleProps & {
@@ -43,7 +43,7 @@ const levelOptions = [
 const HeadingInternal: ComponentConfig<HeadingProps> = {
 	fields: {
 		text: {
-			type: 'textarea',
+			type: 'text',
 			contentEditable: true,
 		},
 		size: {
@@ -84,11 +84,13 @@ const HeadingInternal: ComponentConfig<HeadingProps> = {
 		sectionTextAlign,
 		sectionMaxWidth,
 	}) => {
-		const dragRef = useRef<HTMLDivElement>(null);
-		const backgroundColor =
-			sectionBackgroundColor === 'custom'
-				? sectionBackgroundColorCustom
-				: sectionBackgroundColor;
+		const backgroundColor = useMemo(
+			() =>
+				sectionBackgroundColor === 'custom'
+					? sectionBackgroundColorCustom
+					: sectionBackgroundColor,
+			[sectionBackgroundColor, sectionBackgroundColorCustom]
+		);
 
 		return (
 			<Section
@@ -97,7 +99,6 @@ const HeadingInternal: ComponentConfig<HeadingProps> = {
 				paddingBottom={sectionPaddingBottom}
 				textAlign={sectionTextAlign}
 				maxWidth={sectionMaxWidth}
-				ref={dragRef}
 			>
 				<_Heading size={size} rank={level as any}>
 					<span style={{ display: 'block', textAlign: align, width: '100%' }}>

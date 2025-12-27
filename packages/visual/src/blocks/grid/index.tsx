@@ -1,5 +1,5 @@
 import type { ComponentConfig, Slot } from '@measured/puck';
-import { CSSProperties, useRef } from 'react';
+import { CSSProperties } from 'react';
 import styles from './styles.module.css';
 import { getClassNameFactory } from '../../utils';
 import { Section } from '../../components/section';
@@ -50,8 +50,6 @@ export const GridBlock: ComponentConfig<GridProps> = {
 		sectionTextAlign,
 		sectionMaxWidth,
 	}) => {
-		const dragRef = useRef<HTMLDivElement>(null);
-
 		const backgroundColor =
 			sectionBackgroundColor === 'custom'
 				? sectionBackgroundColorCustom
@@ -71,7 +69,6 @@ export const GridBlock: ComponentConfig<GridProps> = {
 				paddingBottom={sectionPaddingBottom}
 				textAlign={sectionTextAlign}
 				maxWidth={sectionMaxWidth}
-				ref={dragRef}
 			>
 				<Items
 					disallow={['Hero', 'Stats']}

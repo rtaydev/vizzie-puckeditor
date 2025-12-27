@@ -217,16 +217,19 @@ export const ColorPickerField: CustomFieldRender<string> = (props) => {
 											const rgba = hexToRgba(value);
 											return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
 									  })()
-									: '#000000',
+									: '#FFFFFF',
 								zIndex: 1,
 							}}
 						/>
-						{!value && (
-							<Palette
-								size={20}
-								style={{ color: '#9ca3af', position: 'absolute', zIndex: 2 }}
-							/>
-						)}
+
+						<Palette
+							size={20}
+							style={{
+								color: value ? '#FFFFFF' : '#9ca3af',
+								position: 'absolute',
+								zIndex: 2,
+							}}
+						/>
 					</button>
 					{showPicker && (
 						<div

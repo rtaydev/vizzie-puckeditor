@@ -14,7 +14,7 @@ export type SectionStyleProps = {
 export const sectionFields: Fields<SectionStyleProps> = {
 	sectionBackgroundColor: {
 		type: 'select',
-		label: 'Background Color',
+		label: 'Bg Color',
 		options: [
 			{ label: 'None', value: '' },
 			{ label: 'White', value: 'white' },
@@ -26,7 +26,7 @@ export const sectionFields: Fields<SectionStyleProps> = {
 	},
 	sectionBackgroundColorCustom: {
 		type: 'custom',
-		label: 'Custom Background Color',
+		label: 'Custom Bg Color',
 		// @ts-ignore
 		render: ColorPickerField,
 		// @ts-expect-error - TODO: fix this type error
@@ -45,7 +45,7 @@ export const sectionFields: Fields<SectionStyleProps> = {
 	},
 	sectionTextAlign: {
 		type: 'radio',
-		label: 'Text Alignment',
+		label: 'Alignment',
 		options: [
 			{ label: 'Left', value: 'left' },
 			{ label: 'Center', value: 'center' },
@@ -54,7 +54,7 @@ export const sectionFields: Fields<SectionStyleProps> = {
 	},
 	sectionMaxWidth: {
 		type: 'text',
-		label: 'Max Width',
+		label: 'mWidth',
 		placeholder: 'e.g., 1280px, 100%',
 	},
 };

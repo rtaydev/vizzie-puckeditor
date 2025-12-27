@@ -29,17 +29,9 @@ export default function Home() {
 		}
 	}, []);
 
-	// Save data to localStorage when it changes
-	useEffect(() => {
-		if (isLoaded && typeof window !== 'undefined') {
-			try {
-				localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-			} catch (error) {
-				console.error('Error saving data to localStorage:', error);
-			}
-		}
-	}, [data, isLoaded]);
-
+	// handlePublish is called when:
+	// 1. User clicks the custom "Save" button (via handleSave -> handlePublish)
+	// 2. Puck's built-in publish action (via onPublish prop)
 	const handlePublish = async (next: any) => {
 		setData(next);
 	};

@@ -7,7 +7,6 @@ import {
 	sectionFields,
 	type SectionStyleProps,
 } from '../../config/sectionFields';
-import { useRef } from 'react';
 
 const getClassName = getClassNameFactory('Flex', styles);
 
@@ -32,7 +31,7 @@ const FlexInternal: ComponentConfig<FlexProps> = {
 			],
 		},
 		justifyContent: {
-			label: 'Justify Content',
+			label: 'Align',
 			type: 'radio',
 			options: [
 				{ label: 'Start', value: 'start' },
@@ -81,7 +80,6 @@ const FlexInternal: ComponentConfig<FlexProps> = {
 		sectionTextAlign,
 		sectionMaxWidth,
 	}) => {
-		const dragRef = useRef<HTMLDivElement>(null);
 		const backgroundColor =
 			sectionBackgroundColor === 'custom'
 				? sectionBackgroundColorCustom
@@ -95,7 +93,6 @@ const FlexInternal: ComponentConfig<FlexProps> = {
 				paddingBottom={sectionPaddingBottom}
 				textAlign={sectionTextAlign}
 				maxWidth={sectionMaxWidth}
-				ref={dragRef}
 			>
 				<Items
 					className={getClassName()}

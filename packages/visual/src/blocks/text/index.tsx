@@ -6,7 +6,6 @@ import {
 	sectionFields,
 	type SectionStyleProps,
 } from '../../config/sectionFields';
-import { useRef } from 'react';
 
 export type TextProps = WithLayout<
 	SectionStyleProps & {
@@ -22,8 +21,7 @@ export type TextProps = WithLayout<
 const TextInner: ComponentConfig<TextProps> = {
 	fields: {
 		text: {
-			type: 'textarea',
-			contentEditable: true,
+			type: 'text',
 		},
 		size: {
 			type: 'select',
@@ -71,7 +69,6 @@ const TextInner: ComponentConfig<TextProps> = {
 		sectionTextAlign,
 		sectionMaxWidth,
 	}) => {
-		const dragRef = useRef<HTMLDivElement>(null);
 		const backgroundColor =
 			sectionBackgroundColor === 'custom'
 				? sectionBackgroundColorCustom
@@ -84,7 +81,6 @@ const TextInner: ComponentConfig<TextProps> = {
 				paddingBottom={sectionPaddingBottom}
 				textAlign={sectionTextAlign}
 				maxWidth={sectionMaxWidth || maxWidth}
-				ref={dragRef}
 			>
 				<span
 					style={{

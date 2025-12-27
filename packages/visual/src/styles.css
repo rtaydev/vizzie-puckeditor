@@ -4,3 +4,15 @@
 	--font-sans: 'Inter', sans-serif;
 	--font-mono: 'Inter', monospace;
 }
+
+[class*='_PuckFields-'] [class*='_InputWrapper_'] [class*='_Input_'] {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+
+	[class*='_Input-label_'] {
+		padding-bottom: 0;
+	}
+}

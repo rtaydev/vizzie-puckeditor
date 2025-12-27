@@ -7,6 +7,7 @@ import type {
 import { spacingOptions } from '../../config/options';
 import { getClassNameFactory } from '../../utils';
 import styles from './styles.module.css';
+import { LayoutGrid } from 'lucide-react';
 
 type LayoutFieldProps = {
 	padding?: string;
@@ -29,6 +30,8 @@ export type LayoutProps = WithLayout<{
 
 export const layoutField: ObjectField<LayoutFieldProps> = {
 	type: 'object',
+	label: 'Spacing',
+	labelIcon: <LayoutGrid size={16} />,
 	objectFields: {
 		spanCol: {
 			label: 'Grid Columns',
@@ -52,7 +55,7 @@ export const layoutField: ObjectField<LayoutFieldProps> = {
 		},
 		padding: {
 			type: 'select',
-			label: 'Vertical Padding',
+			label: 'px',
 			options: [{ label: '0px', value: '0px' }, ...spacingOptions],
 		},
 	},
