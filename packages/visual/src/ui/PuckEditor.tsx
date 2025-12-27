@@ -15,6 +15,7 @@ import {
 } from 'react';
 import { PuckRenderer } from '../render/PuckRenderer';
 import { ArrowLeft, File, Save } from 'lucide-react';
+import GridActionBar from '../activebars/grid';
 
 const DEFAULT_LOCAL_STORAGE_KEY = 'puck-editor-data';
 const ACTION_TYPE_SET_DATA = 'setData';
@@ -178,6 +179,9 @@ export const PuckEditor = ({
 			onAction: handleAction,
 			onPublish: handlePublish,
 			dnd: { disableAutoScroll: true } as const,
+			overrides: {
+				actionBar: GridActionBar,
+			},
 		}),
 		[config, currentData, handleChange, handleAction, handlePublish]
 	);

@@ -21,7 +21,7 @@ export const GridBlock: ComponentConfig<GridProps> = {
 	fields: {
 		numColumns: {
 			type: 'number',
-			label: 'Number of columns',
+			label: 'Cols',
 			min: 1,
 			max: 12,
 		},
