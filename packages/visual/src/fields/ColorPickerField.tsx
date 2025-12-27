@@ -236,7 +236,7 @@ export const ColorPickerField: CustomFieldRender<string> = (props) => {
 							style={{
 								position: 'absolute',
 								top: '48px',
-								left: 0,
+								right: 0,
 								zIndex: 1000,
 							}}
 							onClick={(e) => e.stopPropagation()}

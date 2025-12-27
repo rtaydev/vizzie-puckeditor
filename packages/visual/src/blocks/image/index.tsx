@@ -96,17 +96,12 @@ const ImageBlockInternal: ComponentConfig<ImageBlockProps> = {
 		height,
 		objectFit,
 		align,
-		sectionBackgroundColor,
-		sectionBackgroundColorCustom,
-		sectionPaddingTop,
-		sectionPaddingBottom,
-		sectionTextAlign,
-		sectionMaxWidth,
+		sectionStyle,
 	}) => {
 		const backgroundColor =
-			sectionBackgroundColor === 'custom'
-				? sectionBackgroundColorCustom
-				: sectionBackgroundColor;
+			sectionStyle?.backgroundColor === 'custom'
+				? sectionStyle?.backgroundColorCustom
+				: sectionStyle?.backgroundColor;
 
 		const imageSrc = src || imageUrl;
 
@@ -114,10 +109,10 @@ const ImageBlockInternal: ComponentConfig<ImageBlockProps> = {
 			return (
 				<Section
 					backgroundColor={backgroundColor}
-					paddingTop={sectionPaddingTop}
-					paddingBottom={sectionPaddingBottom}
-					textAlign={sectionTextAlign}
-					maxWidth={sectionMaxWidth}
+					paddingTop={sectionStyle?.paddingTop}
+					paddingBottom={sectionStyle?.paddingBottom}
+					alignItems={sectionStyle?.alignItems}
+					maxWidth={sectionStyle?.maxWidth}
 				>
 					<div
 						style={{
@@ -147,10 +142,10 @@ const ImageBlockInternal: ComponentConfig<ImageBlockProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionPaddingTop}
-				paddingBottom={sectionPaddingBottom}
-				textAlign={sectionTextAlign}
-				maxWidth={sectionMaxWidth}
+				paddingTop={sectionStyle?.paddingTop}
+				paddingBottom={sectionStyle?.paddingBottom}
+				alignItems={sectionStyle?.alignItems}
+				maxWidth={sectionStyle?.maxWidth}
 			>
 				<div
 					style={{

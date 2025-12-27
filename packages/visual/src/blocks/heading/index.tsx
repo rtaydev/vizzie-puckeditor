@@ -72,33 +72,21 @@ const HeadingInternal: ComponentConfig<HeadingProps> = {
 			padding: '8px',
 		},
 	},
-	render: ({
-		align,
-		text,
-		size,
-		level,
-		sectionBackgroundColor,
-		sectionBackgroundColorCustom,
-		sectionPaddingTop,
-		sectionPaddingBottom,
-		sectionTextAlign,
-		sectionMaxWidth,
-	}) => {
-		const backgroundColor = useMemo(
-			() =>
-				sectionBackgroundColor === 'custom'
-					? sectionBackgroundColorCustom
-					: sectionBackgroundColor,
-			[sectionBackgroundColor, sectionBackgroundColorCustom]
-		);
+	render: ({ align, text, size, level, sectionStyle }) => {
+		const backgroundColor = useMemo(() => {
+			if (!sectionStyle?.backgroundColor) return undefined;
+			return sectionStyle.backgroundColor === 'custom'
+				? sectionStyle.backgroundColorCustom
+				: sectionStyle.backgroundColor;
+		}, [sectionStyle?.backgroundColor, sectionStyle?.backgroundColorCustom]);
 
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionPaddingTop}
-				paddingBottom={sectionPaddingBottom}
-				textAlign={sectionTextAlign}
-				maxWidth={sectionMaxWidth}
+				paddingTop={sectionStyle?.paddingTop}
+				paddingBottom={sectionStyle?.paddingBottom}
+				alignItems={sectionStyle?.alignItems}
+				maxWidth={sectionStyle?.maxWidth}
 			>
 				<_Heading size={size} rank={level as any}>
 					<span style={{ display: 'block', textAlign: align, width: '100%' }}>

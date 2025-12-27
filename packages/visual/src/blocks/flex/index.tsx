@@ -73,26 +73,21 @@ const FlexInternal: ComponentConfig<FlexProps> = {
 		gap,
 		wrap,
 		items: Items,
-		sectionBackgroundColor,
-		sectionBackgroundColorCustom,
-		sectionPaddingTop,
-		sectionPaddingBottom,
-		sectionTextAlign,
-		sectionMaxWidth,
+		sectionStyle,
 	}) => {
 		const backgroundColor =
-			sectionBackgroundColor === 'custom'
-				? sectionBackgroundColorCustom
-				: sectionBackgroundColor;
+			sectionStyle?.backgroundColor === 'custom'
+				? sectionStyle?.backgroundColorCustom
+				: sectionStyle?.backgroundColor;
 
 		return (
 			<Section
 				style={{ height: '100%' }}
 				backgroundColor={backgroundColor}
-				paddingTop={sectionPaddingTop}
-				paddingBottom={sectionPaddingBottom}
-				textAlign={sectionTextAlign}
-				maxWidth={sectionMaxWidth}
+				paddingTop={sectionStyle?.paddingTop}
+				paddingBottom={sectionStyle?.paddingBottom}
+				alignItems={sectionStyle?.alignItems}
+				maxWidth={sectionStyle?.maxWidth}
 			>
 				<Items
 					className={getClassName()}

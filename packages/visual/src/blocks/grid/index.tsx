@@ -39,21 +39,11 @@ export const GridBlock: ComponentConfig<GridProps> = {
 		gap: 24,
 		items: [],
 	},
-	render: ({
-		gap,
-		numColumns,
-		items: Items,
-		sectionBackgroundColor,
-		sectionBackgroundColorCustom,
-		sectionPaddingTop,
-		sectionPaddingBottom,
-		sectionTextAlign,
-		sectionMaxWidth,
-	}) => {
+	render: ({ gap, numColumns, items: Items, sectionStyle }) => {
 		const backgroundColor =
-			sectionBackgroundColor === 'custom'
-				? sectionBackgroundColorCustom
-				: sectionBackgroundColor;
+			sectionStyle?.backgroundColor === 'custom'
+				? sectionStyle?.backgroundColorCustom
+				: sectionStyle?.backgroundColor;
 
 		const gridStyle: CSSProperties = {
 			display: 'grid',
@@ -65,10 +55,10 @@ export const GridBlock: ComponentConfig<GridProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionPaddingTop}
-				paddingBottom={sectionPaddingBottom}
-				textAlign={sectionTextAlign}
-				maxWidth={sectionMaxWidth}
+				paddingTop={sectionStyle?.paddingTop}
+				paddingBottom={sectionStyle?.paddingBottom}
+				alignItems={sectionStyle?.alignItems}
+				maxWidth={sectionStyle?.maxWidth}
 			>
 				<Items
 					disallow={['Hero', 'Stats']}

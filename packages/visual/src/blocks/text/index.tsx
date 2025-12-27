@@ -57,31 +57,19 @@ const TextInner: ComponentConfig<TextProps> = {
 		size: 'm',
 		color: 'default',
 	},
-	render: ({
-		align,
-		color,
-		text,
-		size,
-		maxWidth,
-		sectionBackgroundColor,
-		sectionBackgroundColorCustom,
-		sectionPaddingTop,
-		sectionPaddingBottom,
-		sectionTextAlign,
-		sectionMaxWidth,
-	}) => {
+	render: ({ align, color, text, size, maxWidth, sectionStyle }) => {
 		const backgroundColor =
-			sectionBackgroundColor === 'custom'
-				? sectionBackgroundColorCustom
-				: sectionBackgroundColor;
+			sectionStyle?.backgroundColor === 'custom'
+				? sectionStyle?.backgroundColorCustom
+				: sectionStyle?.backgroundColor;
 
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionPaddingTop}
-				paddingBottom={sectionPaddingBottom}
-				textAlign={sectionTextAlign}
-				maxWidth={sectionMaxWidth || maxWidth}
+				paddingTop={sectionStyle?.paddingTop}
+				paddingBottom={sectionStyle?.paddingBottom}
+				alignItems={sectionStyle?.alignItems}
+				maxWidth={sectionStyle?.maxWidth || maxWidth}
 			>
 				<span
 					style={{

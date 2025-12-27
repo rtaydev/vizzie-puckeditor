@@ -18,7 +18,7 @@ export type SectionProps = {
 	backgroundColor?: string;
 	paddingTop?: string;
 	paddingBottom?: string;
-	textAlign?: 'left' | 'center' | 'right';
+	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 };
 
 export const Section = forwardRef<HTMLDivElement, SectionProps>(
@@ -31,7 +31,7 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
 			backgroundColor,
 			paddingTop,
 			paddingBottom,
-			textAlign,
+			alignItems,
 		},
 		ref
 	) => {
@@ -44,11 +44,6 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
 				black: styles['Section--bg-black'],
 			};
 			return bgMap[bg];
-		};
-
-		const getAlignClass = (align?: string): string | undefined => {
-			if (!align) return undefined;
-			return getClassName(`inner--align-${align}`);
 		};
 
 		const backgroundClass = getBackgroundClass(backgroundColor);
@@ -64,7 +59,9 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
 
 		const innerStyle: CSSProperties = {
 			maxWidth,
-			...(textAlign && !getAlignClass(textAlign) && { textAlign }),
+			display: 'flex',
+			flexDirection: 'column',
+			...(alignItems && { alignItems }),
 		};
 
 		const sectionClasses = joinClasses(
@@ -73,10 +70,7 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
 			className
 		);
 
-		const innerClasses = joinClasses(
-			getClassName('inner'),
-			getAlignClass(textAlign)
-		);
+		const innerClasses = getClassName('inner');
 
 		return (
 			<div className={sectionClasses} style={sectionStyle} ref={ref}>

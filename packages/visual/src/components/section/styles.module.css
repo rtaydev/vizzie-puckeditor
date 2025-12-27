@@ -40,15 +40,3 @@
 	color: #ffffff;
 }
 
-/* Alignment utilities */
-.Section-inner--align-left {
-	text-align: left;
-}
-
-.Section-inner--align-center {
-	text-align: center;
-}
-
-.Section-inner--align-right {
-	text-align: right;
-}
