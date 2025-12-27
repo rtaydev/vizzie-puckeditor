@@ -1,0 +1,15 @@
+.Image {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	/* Prevent jitter from Puck's hover borders */
+	border: 2px solid transparent;
+	box-sizing: border-box;
+	/* Smooth transitions */
+	transition: border-color 0.15s ease;
+}
+
+/* Prevent layout shift when Puck adds hover styles */
+.Image:hover {
+	border-color: transparent;
+}

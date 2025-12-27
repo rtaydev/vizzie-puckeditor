@@ -1,11 +1,10 @@
 .Grid {
-	display: flex;
-	flex-direction: column;
-	width: auto;
+	display: grid;
+	width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
 	.Grid {
-		display: grid;
+		grid-template-columns: 1fr !important;
 	}
 }

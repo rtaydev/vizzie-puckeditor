@@ -5,13 +5,20 @@ import {
 	Heading as _Heading,
 	type HeadingProps as _HeadingProps,
 } from '../../components/heading';
+import {
+	sectionFields,
+	type SectionStyleProps,
+} from '../../config/sectionFields';
+import { useRef } from 'react';
 
-export type HeadingProps = WithLayout<{
-	align: 'left' | 'center' | 'right';
-	text?: string;
-	level?: _HeadingProps['rank'];
-	size: _HeadingProps['size'];
-}>;
+export type HeadingProps = WithLayout<
+	SectionStyleProps & {
+		align: 'left' | 'center' | 'right';
+		text?: string;
+		level?: _HeadingProps['rank'];
+		size: _HeadingProps['size'];
+	}
+>;
 
 const sizeOptions = [
 	{ value: 'xxxl', label: 'XXXL' },
@@ -55,6 +62,7 @@ const HeadingInternal: ComponentConfig<HeadingProps> = {
 				{ label: 'Right', value: 'right' },
 			],
 		},
+		...sectionFields,
 	},
 	defaultProps: {
 		align: 'left',
@@ -64,9 +72,33 @@ const HeadingInternal: ComponentConfig<HeadingProps> = {
 			padding: '8px',
 		},
 	},
-	render: ({ align, text, size, level }) => {
+	render: ({
+		align,
+		text,
+		size,
+		level,
+		sectionBackgroundColor,
+		sectionBackgroundColorCustom,
+		sectionPaddingTop,
+		sectionPaddingBottom,
+		sectionTextAlign,
+		sectionMaxWidth,
+	}) => {
+		const dragRef = useRef<HTMLDivElement>(null);
+		const backgroundColor =
+			sectionBackgroundColor === 'custom'
+				? sectionBackgroundColorCustom
+				: sectionBackgroundColor;
+
 		return (
-			<Section>
+			<Section
+				backgroundColor={backgroundColor}
+				paddingTop={sectionPaddingTop}
+				paddingBottom={sectionPaddingBottom}
+				textAlign={sectionTextAlign}
+				maxWidth={sectionMaxWidth}
+				ref={dragRef}
+			>
 				<_Heading size={size} rank={level as any}>
 					<span style={{ display: 'block', textAlign: align, width: '100%' }}>
 						{text}

@@ -21,3 +21,34 @@
 	margin-inline-start: 0;
 	margin-inline-end: 0;
 }
+
+/* Background color utilities */
+.Section--bg-white {
+	background-color: #ffffff;
+}
+
+.Section--bg-gray {
+	background-color: #f9fafb;
+}
+
+.Section--bg-gray-dark {
+	background-color: #f3f4f6;
+}
+
+.Section--bg-black {
+	background-color: #000000 !important;
+	color: #ffffff;
+}
+
+/* Alignment utilities */
+.Section-inner--align-left {
+	text-align: left;
+}
+
+.Section-inner--align-center {
+	text-align: center;
+}
+
+.Section-inner--align-right {
+	text-align: right;
+}
