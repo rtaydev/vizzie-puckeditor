@@ -10,6 +10,7 @@ import {
 	type SectionStyleProps,
 } from '../../config/sectionFields';
 import { ImageUploadField } from '../../fields/ImageUploadField';
+import { AlignLeft, Link, Maximize } from 'lucide-react';
 
 export type ImageBlockProps = WithLayout<
 	SectionStyleProps & {
@@ -27,33 +28,37 @@ const ImageBlockInternal: ComponentConfig<ImageBlockProps> = {
 	fields: {
 		src: {
 			type: 'custom',
-			label: 'Image Upload',
+			label: 'Upload',
 			// @ts-ignore
 			render: ImageUploadField,
 		},
 		imageUrl: {
 			type: 'text',
-			label: 'Or Image URL',
+			label: 'URL',
+			labelIcon: <Link size={16} />,
 			placeholder: 'https://example.com/image.jpg',
 		},
 		alt: {
 			type: 'text',
-			label: 'Alt Text',
+			label: 'Alt',
 			placeholder: 'Describe the image',
 		},
 		width: {
 			type: 'text',
 			label: 'Width',
+			labelIcon: <Maximize size={16} />,
 			placeholder: 'e.g., 100%, 500px, auto',
 		},
 		height: {
 			type: 'text',
 			label: 'Height',
+			labelIcon: <Maximize size={16} />,
 			placeholder: 'e.g., auto, 300px',
 		},
 		objectFit: {
 			type: 'select',
-			label: 'Object Fit',
+			label: 'Fit',
+			labelIcon: <Maximize size={16} />,
 			options: [
 				{ label: 'Cover', value: 'cover' },
 				{ label: 'Contain', value: 'contain' },
@@ -64,7 +69,8 @@ const ImageBlockInternal: ComponentConfig<ImageBlockProps> = {
 		},
 		align: {
 			type: 'radio',
-			label: 'Alignment',
+			label: 'Align',
+			labelIcon: <AlignLeft size={16} />,
 			options: [
 				{ label: 'Left', value: 'left' },
 				{ label: 'Center', value: 'center' },

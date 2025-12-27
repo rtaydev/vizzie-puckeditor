@@ -16,7 +16,6 @@ import {
 import { PuckRenderer } from '../render/PuckRenderer';
 import { ArrowLeft, File, Save } from 'lucide-react';
 
-// Constants
 const DEFAULT_LOCAL_STORAGE_KEY = 'puck-editor-data';
 const ACTION_TYPE_SET_DATA = 'setData';
 
@@ -29,42 +28,33 @@ export const PuckEditor = ({
 	const [currentData, setCurrentData] = useState(data);
 	const [previewData, setPreviewData] = useState(data);
 
-	// Memoize config to prevent recreation on every render
 	const config: Config = useMemo(
 		() => createPuckConfig(options) as unknown as Config,
 		[options]
 	);
 
 	const isInternalUpdateRef = useRef(false);
-	// Store latest data in ref to avoid rerenders during contentEditable editing
 	const latestDataRef = useRef(data);
 
 	const enableLocalStorage = options.enableLocalStorage ?? false;
 	const localStorageKey = options.localStorageKey || DEFAULT_LOCAL_STORAGE_KEY;
 
-	// Sync currentData when external data prop changes (but not from internal updates)
 	useEffect(() => {
 		if (!isInternalUpdateRef.current) {
 			setCurrentData(data);
 			setPreviewData(data);
 			latestDataRef.current = data;
 		}
-		// Reset flag after a microtask to allow state updates to complete
 		Promise.resolve().then(() => {
 			isInternalUpdateRef.current = false;
 		});
 	}, [data]);
 
 	const handleChange = useCallback((newData: any) => {
-		// Store in ref to avoid rerenders - this allows contentEditable to work smoothly
 		latestDataRef.current = newData;
-		// Only update state on specific actions or when needed
-		// This prevents rerenders during typing
 	}, []);
 
 	const handleAction = useCallback((action: { type: string; data?: any }) => {
-		// onAction fires on specific actions (like contentEditable blur)
-		// Update state when actions occur, using the latest data from ref
 		if (action.type === ACTION_TYPE_SET_DATA && action.data) {
 			isInternalUpdateRef.current = true;
 			latestDataRef.current = action.data;
@@ -76,7 +66,6 @@ export const PuckEditor = ({
 
 	const handlePublish = useCallback(
 		async (next: any) => {
-			// Mark as internal update to prevent sync loop
 			isInternalUpdateRef.current = true;
 			setCurrentData(next);
 			setPreviewData(next);
@@ -85,13 +74,10 @@ export const PuckEditor = ({
 		[onPublish]
 	);
 
-	// Shared function to save data (used by both preview and save)
 	const saveData = useCallback(
 		async (dataToSave: any) => {
-			// Update state with latest data
 			setCurrentData(dataToSave);
 
-			// Save to localStorage if enabled
 			if (enableLocalStorage && typeof window !== 'undefined') {
 				try {
 					localStorage.setItem(localStorageKey, JSON.stringify(dataToSave));
@@ -100,14 +86,12 @@ export const PuckEditor = ({
 				}
 			}
 
-			// Call handlePublish to update parent and trigger onPublish
 			await handlePublish(dataToSave);
 		},
 		[handlePublish, enableLocalStorage, localStorageKey]
 	);
 
 	const handlePreview = useCallback(async () => {
-		// Use latest data from ref to ensure we save all contentEditable changes
 		const dataToSave = latestDataRef.current;
 		await saveData(dataToSave);
 		setPreviewData(dataToSave);
@@ -115,12 +99,10 @@ export const PuckEditor = ({
 	}, [saveData]);
 
 	const handleSave = useCallback(async () => {
-		// Use latest data from ref to ensure we save all contentEditable changes
 		const dataToSave = latestDataRef.current;
 		await saveData(dataToSave);
 	}, [saveData]);
 
-	// Memoize style objects to prevent recreation on every render
 	const headerStyle = useMemo(
 		() => ({
 			display: 'flex' as const,

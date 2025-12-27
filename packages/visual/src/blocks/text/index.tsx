@@ -22,6 +22,7 @@ const TextInner: ComponentConfig<TextProps> = {
 	fields: {
 		text: {
 			type: 'text',
+			contentEditable: true,
 		},
 		size: {
 			type: 'select',
