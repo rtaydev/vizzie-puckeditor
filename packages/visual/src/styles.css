@@ -1,1 +1,6 @@
 @import '@measured/puck/puck.css';
+
+@theme {
+	--font-sans: 'Inter', sans-serif;
+	--font-mono: 'Inter', monospace;
+}
