@@ -41,6 +41,8 @@
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
-		"lucide-react": "^0.562.0"
+		"@types/react-color": "^3.0.13",
+		"lucide-react": "^0.562.0",
+		"react-color": "^2.19.3"
 	}
 }

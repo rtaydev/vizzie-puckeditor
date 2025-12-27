@@ -1,5 +1,6 @@
 import type { Fields } from '@measured/puck';
 import { spacingOptions } from './options';
+import { ColorPickerField } from '../fields/ColorPickerField';
 
 export type SectionStyleProps = {
 	sectionBackgroundColor?: string;
@@ -24,9 +25,10 @@ export const sectionFields: Fields<SectionStyleProps> = {
 		],
 	},
 	sectionBackgroundColorCustom: {
-		type: 'text',
+		type: 'custom',
 		label: 'Custom Background Color',
-		placeholder: 'e.g., #ff0000, rgb(255,0,0), blue',
+		// @ts-ignore
+		render: ColorPickerField,
 		// @ts-expect-error - TODO: fix this type error
 		visible: (values: { sectionBackgroundColor: string }) =>
 			values.sectionBackgroundColor === 'custom',
