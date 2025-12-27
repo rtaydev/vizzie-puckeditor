@@ -12,6 +12,8 @@ import { ListBlock } from '../blocks/list';
 import { QuoteBlock } from '../blocks/quote';
 import { VideoBlock } from '../blocks/video';
 import { CardBlock } from '../blocks/card';
+import { HeroOneBlock } from '../blocks/hero-one';
+import { HeroTwoBlock } from '../blocks/hero-two';
 
 export const createPuckConfig = (options: PuckOptions): Config => {
 	return {
@@ -28,6 +30,8 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 			QuoteBlock,
 			VideoBlock,
 			CardBlock,
+			HeroOneBlock,
+			HeroTwoBlock,
 		},
 		categories: {
 			typography: {
@@ -43,6 +47,10 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 			},
 			interactive: {
 				components: ['ButtonBlock'],
+				defaultExpanded: false,
+			},
+			templates: {
+				components: ['HeroOneBlock', 'HeroTwoBlock'],
 				defaultExpanded: false,
 			},
 		},

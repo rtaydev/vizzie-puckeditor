@@ -1,16 +1,20 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { CustomFieldRender } from '@measured/puck';
 import { Upload } from 'lucide-react';
 
-type ImageUploadFieldProps = Parameters<CustomFieldRender<string>>[0];
+type ImageUploadFieldProps = Parameters<CustomFieldRender<string | undefined>>[0];
 
-export const ImageUploadField: CustomFieldRender<string> = (props) => {
+export const ImageUploadField: CustomFieldRender<string | undefined> = (props) => {
 	const { value, onChange, field } = props;
 	const [uploading, setUploading] = useState(false);
 	const [preview, setPreview] = useState<string | null>(value || null);
 	const fileInputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		setPreview(value || null);
+	}, [value]);
 
 	const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];

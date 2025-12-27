@@ -50,13 +50,13 @@
 
 [class*='_PuckFields-'] [class*='_InputWrapper_'] [class*='_Input_'] {
 	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
 	gap: var(--puck-spacing-sm);
 
 	[class*='_Input-label_'] {
 		padding-bottom: 0;
+		font-weight: var(--puck-font-weight-normal);
+		font-size: var(--puck-font-size-small);
 	}
 	[class*='_Input-input_'] {
 		font-size: var(--puck-font-size-small);
