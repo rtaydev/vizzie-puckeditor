@@ -68,9 +68,6 @@ const HeadingInternal: ComponentConfig<HeadingProps> = {
 		align: 'left',
 		text: 'Heading',
 		size: 'm',
-		layout: {
-			padding: '8px',
-		},
 	},
 	render: ({ align, text, size, level, sectionStyle }) => {
 		const backgroundColor = useMemo(() => {

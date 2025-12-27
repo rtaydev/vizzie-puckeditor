@@ -7,6 +7,7 @@ import {
 	sectionFields,
 	type SectionStyleProps,
 } from '../../config/sectionFields';
+import { GapSliderField } from '../../fields/GapSliderField';
 
 const getClassName = getClassNameFactory('Flex', styles);
 
@@ -40,9 +41,9 @@ const FlexInternal: ComponentConfig<FlexProps> = {
 			],
 		},
 		gap: {
+			type: 'custom',
 			label: 'Gap',
-			type: 'number',
-			min: 0,
+			render: GapSliderField,
 		},
 		wrap: {
 			label: 'Wrap',

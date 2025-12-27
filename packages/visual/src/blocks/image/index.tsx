@@ -84,9 +84,6 @@ const ImageBlockInternal: ComponentConfig<ImageBlockProps> = {
 		alt: '',
 		objectFit: 'cover',
 		align: 'center',
-		layout: {
-			padding: '8px',
-		},
 	},
 	render: ({
 		src,

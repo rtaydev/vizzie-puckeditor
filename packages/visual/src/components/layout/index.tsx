@@ -4,13 +4,11 @@ import type {
 	DefaultComponentProps,
 	ObjectField,
 } from '@measured/puck';
-import { spacingOptions } from '../../config/options';
 import { getClassNameFactory } from '../../utils';
 import styles from './styles.module.css';
 import { LayoutGrid } from 'lucide-react';
 
 type LayoutFieldProps = {
-	padding?: string;
 	spanCol?: number;
 	spanRow?: number;
 	grow?: boolean;
@@ -30,7 +28,7 @@ export type LayoutProps = WithLayout<{
 
 export const layoutField: ObjectField<LayoutFieldProps> = {
 	type: 'object',
-	label: 'Spacing',
+	label: 'Layout',
 	labelIcon: <LayoutGrid size={16} />,
 	objectFields: {
 		spanCol: {
@@ -53,11 +51,6 @@ export const layoutField: ObjectField<LayoutFieldProps> = {
 				{ label: 'false', value: false },
 			],
 		},
-		padding: {
-			type: 'select',
-			label: 'px',
-			options: [{ label: '0px', value: '0px' }, ...spacingOptions],
-		},
 	},
 };
 
@@ -73,8 +66,6 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
 					gridRow: layout?.spanRow
 						? `span ${Math.max(Math.min(layout.spanRow, 12), 1)}`
 						: undefined,
-					paddingTop: layout?.padding,
-					paddingBottom: layout?.padding,
 					flex: layout?.grow ? '1 1 0' : undefined,
 					...style,
 				}}
@@ -104,7 +95,6 @@ export function withLayout<
 			layout: {
 				spanCol: 1,
 				spanRow: 1,
-				padding: '0px',
 				grow: false,
 				...componentConfig.defaultProps?.layout,
 			},
@@ -118,7 +108,6 @@ export function withLayout<
 						objectFields: {
 							spanCol: layoutField.objectFields.spanCol,
 							spanRow: layoutField.objectFields.spanRow,
-							padding: layoutField.objectFields.padding,
 						},
 					},
 				};
@@ -130,20 +119,14 @@ export function withLayout<
 						...layoutField,
 						objectFields: {
 							grow: layoutField.objectFields.grow,
-							padding: layoutField.objectFields.padding,
 						},
 					},
 				};
 			}
 
+			// For non-grid/flex parents, hide layout field entirely
 			return {
 				...componentConfig.fields,
-				layout: {
-					...layoutField,
-					objectFields: {
-						padding: layoutField.objectFields.padding,
-					},
-				},
 			};
 		},
 		inline: true,

@@ -7,6 +7,7 @@ import {
 	sectionFields,
 	type SectionStyleProps,
 } from '../../config/sectionFields';
+import { GapSliderField } from '../../fields/GapSliderField';
 
 const getClassName = getClassNameFactory('Grid', styles);
 
@@ -25,9 +26,9 @@ export const GridBlock: ComponentConfig<GridProps> = {
 			max: 12,
 		},
 		gap: {
-			label: 'Gap (px)',
-			type: 'number',
-			min: 0,
+			type: 'custom',
+			label: 'Gap',
+			render: GapSliderField,
 		},
 		items: {
 			type: 'slot',
