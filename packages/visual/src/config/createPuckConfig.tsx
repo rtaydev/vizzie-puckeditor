@@ -14,6 +14,8 @@ import { VideoBlock } from '../blocks/video';
 import { CardBlock } from '../blocks/card';
 import { HeroOneBlock } from '../blocks/hero-one';
 import { HeroTwoBlock } from '../blocks/hero-two';
+import { HeroThreeBlock } from '../blocks/hero-three';
+import { FeaturesOneBlock } from '../blocks/features/one';
 
 export const createPuckConfig = (options: PuckOptions): Config => {
 	return {
@@ -32,6 +34,8 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 			CardBlock,
 			HeroOneBlock,
 			HeroTwoBlock,
+			HeroThreeBlock,
+			FeaturesOneBlock,
 		},
 		categories: {
 			typography: {
@@ -50,7 +54,12 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 				defaultExpanded: false,
 			},
 			templates: {
-				components: ['HeroOneBlock', 'HeroTwoBlock'],
+				components: [
+					'HeroOneBlock',
+					'HeroTwoBlock',
+					'HeroThreeBlock',
+					'FeaturesOneBlock',
+				],
 				defaultExpanded: false,
 			},
 		},
