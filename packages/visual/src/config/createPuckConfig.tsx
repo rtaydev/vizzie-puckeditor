@@ -6,6 +6,12 @@ import { FlexBlock } from '../blocks/flex';
 import { TextBlock } from '../blocks/text';
 import { ImageBlock } from '../blocks/image';
 import { IconBlock } from '../blocks/icon';
+import { ButtonBlock } from '../blocks/button';
+import { SpacerBlock } from '../blocks/spacer';
+import { ListBlock } from '../blocks/list';
+import { QuoteBlock } from '../blocks/quote';
+import { VideoBlock } from '../blocks/video';
+import { CardBlock } from '../blocks/card';
 
 export const createPuckConfig = (options: PuckOptions): Config => {
 	return {
@@ -16,16 +22,28 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 			TextBlock,
 			ImageBlock,
 			IconBlock,
+			ButtonBlock,
+			SpacerBlock,
+			ListBlock,
+			QuoteBlock,
+			VideoBlock,
+			CardBlock,
 		},
 		categories: {
 			typography: {
-				components: ['HeadingBlock', 'TextBlock'],
+				components: ['HeadingBlock', 'TextBlock', 'QuoteBlock', 'ListBlock'],
 			},
 			layout: {
-				components: ['GridBlock', 'FlexBlock'],
+				components: ['GridBlock', 'FlexBlock', 'SpacerBlock', 'CardBlock'],
+				defaultExpanded: false,
 			},
 			media: {
-				components: ['ImageBlock', 'IconBlock'],
+				components: ['ImageBlock', 'IconBlock', 'VideoBlock'],
+				defaultExpanded: false,
+			},
+			interactive: {
+				components: ['ButtonBlock'],
+				defaultExpanded: false,
 			},
 		},
 	} as unknown as Config;
