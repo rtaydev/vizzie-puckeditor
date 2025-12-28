@@ -2,6 +2,16 @@
 	"name": "@puck-editor/visual",
 	"version": "0.1.1",
 	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"description": "A modern, customizable visual editor component for Next.js built on top of @measured/puck",
+	"keywords": [
+		"puck",
+		"visual",
+		"editor",
+		"next.js"
+	],
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
