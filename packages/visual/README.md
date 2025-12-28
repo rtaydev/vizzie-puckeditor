@@ -14,7 +14,7 @@ A modern, customizable visual editor component for Next.js built on top of [@mea
 
 ## Demo
 
-![Puck Editor Demo](https://i.ibb.co/Fq3chLW5/demo.gif)
+[![bhpaQ.gif](https://s12.gifyu.com/images/bhpaQ.gif)](https://gifyu.com/image/bhpaQ)
 
 ## Installation
 
