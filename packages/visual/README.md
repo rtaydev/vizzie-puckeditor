@@ -10,7 +10,11 @@ A modern, customizable visual editor component for Next.js built on top of [@mea
 ⚙️ **Customizable**: Full TypeScript support with extensive configuration options  
 💾 **Local Storage**: Optional automatic data persistence  
 📱 **Responsive**: Mobile-friendly editor and preview modes  
-🎭 **Theme System**: Comprehensive design tokens (colors, typography, spacing, shadows)  
+🎭 **Theme System**: Comprehensive design tokens (colors, typography, spacing, shadows)
+
+## Demo
+
+![Puck Editor Demo](https://i.ibb.co/Fq3chLW5/demo.gif)
 
 ## Installation
 
@@ -38,24 +42,24 @@ import '@puck-editor/visual/styles.css';
 import { useState } from 'react';
 
 export default function EditorPage() {
-  const [data, setData] = useState({ root: {} });
+	const [data, setData] = useState({ root: {} });
 
-  const handlePublish = async (newData: any) => {
-    // Save your data to a database, API, or storage
-    console.log('Published:', newData);
-    // await fetch('/api/save', { method: 'POST', body: JSON.stringify(newData) });
-  };
+	const handlePublish = async (newData: any) => {
+		// Save your data to a database, API, or storage
+		console.log('Published:', newData);
+		// await fetch('/api/save', { method: 'POST', body: JSON.stringify(newData) });
+	};
 
-  return (
-    <PuckEditor
-      data={data}
-      onPublish={handlePublish}
-      options={{
-        sidebarPosition: 'right',
-        enableLocalStorage: true,
-      }}
-    />
-  );
+	return (
+		<PuckEditor
+			data={data}
+			onPublish={handlePublish}
+			options={{
+				sidebarPosition: 'right',
+				enableLocalStorage: true,
+			}}
+		/>
+	);
 }
 ```
 
@@ -65,16 +69,16 @@ export default function EditorPage() {
 
 ```tsx
 interface PuckEditorProps {
-  data: any;                           // Current editor data
-  onPublish: (data: any) => void | Promise<void>; // Called when user clicks Save
-  options?: PuckOptions;               // Configuration options
+	data: any; // Current editor data
+	onPublish: (data: any) => void | Promise<void>; // Called when user clicks Save
+	options?: PuckOptions; // Configuration options
 }
 
 interface PuckOptions {
-  sidebarPosition?: 'left' | 'right';  // Default: 'right'
-  enableLocalStorage?: boolean;        // Auto-save to localStorage
-  localStorageKey?: string;            // localStorage key (default: 'puck-editor-data')
-  theme?: PuckThemeOptions;            // Theme configuration
+	sidebarPosition?: 'left' | 'right'; // Default: 'right'
+	enableLocalStorage?: boolean; // Auto-save to localStorage
+	localStorageKey?: string; // localStorage key (default: 'puck-editor-data')
+	theme?: PuckThemeOptions; // Theme configuration
 }
 ```
 
@@ -86,36 +90,36 @@ Customize colors, typography, spacing, and more:
 import { PuckEditor, defaultPuckTheme } from '@puck-editor/visual';
 
 <PuckEditor
-  data={data}
-  onPublish={handlePublish}
-  options={{
-    theme: {
-      theme: {
-        ...defaultPuckTheme,
-        colors: {
-          ...defaultPuckTheme.colors,
-          primary: '#5b21b6',
-          secondary: '#0891b2',
-          background: '#f8f8f8',
-        },
-        typography: {
-          ...defaultPuckTheme.typography,
-          fontSans: "'Geist', sans-serif",
-          fontSizeBase: '16px',
-        },
-        spacing: {
-          ...defaultPuckTheme.spacing,
-          md: '20px',
-        },
-      },
-      customCss: `
+	data={data}
+	onPublish={handlePublish}
+	options={{
+		theme: {
+			theme: {
+				...defaultPuckTheme,
+				colors: {
+					...defaultPuckTheme.colors,
+					primary: '#5b21b6',
+					secondary: '#0891b2',
+					background: '#f8f8f8',
+				},
+				typography: {
+					...defaultPuckTheme.typography,
+					fontSans: "'Geist', sans-serif",
+					fontSizeBase: '16px',
+				},
+				spacing: {
+					...defaultPuckTheme.spacing,
+					md: '20px',
+				},
+			},
+			customCss: `
         body {
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
       `,
-    },
-  }}
-/>
+		},
+	}}
+/>;
 ```
 
 #### Theme Structure
@@ -123,6 +127,7 @@ import { PuckEditor, defaultPuckTheme } from '@puck-editor/visual';
 The theme object contains:
 
 **Colors** (20 properties)
+
 - Primary, secondary, background variants
 - Text colors (normal, secondary, tertiary)
 - Border colors (normal, secondary, tertiary)
@@ -131,17 +136,21 @@ The theme object contains:
 - Preview and header colors
 
 **Typography** (8 properties)
+
 - Font families (sans, mono)
 - Font sizes (base, small, large)
 - Font weights (normal, medium, bold)
 
 **Spacing** (5 properties)
+
 - xs, sm, md, lg, xl
 
 **Border Radius** (3 properties)
+
 - sm, md, lg
 
 **Shadows** (3 properties)
+
 - sm, md, lg
 
 ### Theme Editor
@@ -149,6 +158,7 @@ The theme object contains:
 Users can customize the theme in real-time using the built-in Theme Editor (accessible via the Palette button in the header).
 
 **Features:**
+
 - Live color picker with hex input
 - All typography, spacing, and shadow values editable
 - Changes persist to localStorage automatically
@@ -163,18 +173,18 @@ import { PuckRenderer } from '@puck-editor/visual';
 import '@puck-editor/visual/styles.css';
 
 export default function ViewPage() {
-  const [data] = useState(/* your saved data */);
+	const [data] = useState(/* your saved data */);
 
-  return (
-    <PuckRenderer
-      data={data}
-      options={{
-        theme: {
-          theme: yourCustomTheme,
-        },
-      }}
-    />
-  );
+	return (
+		<PuckRenderer
+			data={data}
+			options={{
+				theme: {
+					theme: yourCustomTheme,
+				},
+			}}
+		/>
+	);
 }
 ```
 
@@ -189,11 +199,11 @@ export { PuckRenderer } from '@puck-editor/visual';
 
 // Types
 export type {
-  PuckOptions,
-  PuckEditorProps,
-  PuckRendererProps,
-  PuckTheme,
-  PuckThemeOptions,
+	PuckOptions,
+	PuckEditorProps,
+	PuckRendererProps,
+	PuckTheme,
+	PuckThemeOptions,
 };
 
 // Utilities
@@ -217,6 +227,7 @@ Generates CSS variable declarations from a theme.
 ## LocalStorage
 
 When `enableLocalStorage` is enabled:
+
 - Editor data auto-saves to localStorage on every change
 - Theme changes are persisted to `puck-theme` key
 - Data is keyed by `localStorageKey` (default: `puck-editor-data`)
@@ -232,15 +243,21 @@ The editor uses pre-built blocks. To extend with custom blocks, use the `createP
 import { createPuckConfig, PuckEditor } from '@puck-editor/visual';
 
 export default function Editor() {
-  const config = createPuckConfig({ /* options */ });
+	const config = createPuckConfig({
+		/* options */
+	});
 
-  return (
-    <PuckEditor
-      data={data}
-      onPublish={handlePublish}
-      options={{ /* ... */ }}
-    />
-  );
+	return (
+		<PuckEditor
+			data={data}
+			onPublish={handlePublish}
+			options={
+				{
+					/* ... */
+				}
+			}
+		/>
+	);
 }
 ```
 
@@ -254,33 +271,33 @@ import '@puck-editor/visual/styles.css';
 import { useState } from 'react';
 
 export default function EditorPage() {
-  const [data, setData] = useState({ root: { children: [] } });
+	const [data, setData] = useState({ root: { children: [] } });
 
-  return (
-    <div style={{ height: '100vh' }}>
-      <PuckEditor
-        data={data}
-        onPublish={async (newData) => {
-          setData(newData);
-          // Save to backend
-          await fetch('/api/pages', {
-            method: 'POST',
-            body: JSON.stringify(newData),
-          });
-        }}
-        options={{
-          sidebarPosition: 'right',
-          enableLocalStorage: true,
-          localStorageKey: 'my-page-editor',
-          theme: {
-            theme: {
-              /* your theme */
-            },
-          },
-        }}
-      />
-    </div>
-  );
+	return (
+		<div style={{ height: '100vh' }}>
+			<PuckEditor
+				data={data}
+				onPublish={async (newData) => {
+					setData(newData);
+					// Save to backend
+					await fetch('/api/pages', {
+						method: 'POST',
+						body: JSON.stringify(newData),
+					});
+				}}
+				options={{
+					sidebarPosition: 'right',
+					enableLocalStorage: true,
+					localStorageKey: 'my-page-editor',
+					theme: {
+						theme: {
+							/* your theme */
+						},
+					},
+				}}
+			/>
+		</div>
+	);
 }
 ```
 
@@ -312,4 +329,3 @@ MIT
 ## Support
 
 For issues, questions, or feature requests, please visit the [GitHub repository](https://github.com/russstaylor/puck-editor).
-
