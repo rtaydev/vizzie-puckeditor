@@ -46,7 +46,7 @@ export default function Home() {
 		() =>
 			mergeThemes(defaultPuckTheme, {
 				colors: {
-					primary: '#6366f1',
+					primary: '#b9f264',
 					buttonPrimary: '#6366f1',
 				},
 			} as Partial<PuckTheme>),

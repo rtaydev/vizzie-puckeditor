@@ -3,7 +3,7 @@
 import type { ReactElement } from 'react';
 import { Config, Puck } from '@measured/puck';
 import { createPuckConfig } from '../config/createPuckConfig';
-import { PuckEditorProps } from '../config/types';
+import { PuckEditorProps, PuckTheme } from '../config/types';
 import { TabbedSidebar } from './TabbedSidebar';
 import {
 	useState,
@@ -14,10 +14,11 @@ import {
 	useRef,
 } from 'react';
 import { PuckRenderer } from '../render/PuckRenderer';
-import { ArrowLeft, File, Save } from 'lucide-react';
+import { ArrowLeft, File, Palette, Save } from 'lucide-react';
 import GridActionBar from '../activebars/grid';
 import { defaultPuckTheme } from '../config/defaultTheme';
-import { applyTheme, mergeThemes } from '../utils/theme';
+import { applyTheme, mergeThemes, setTheme, getTheme } from '../utils/theme';
+import { ThemeEditor } from './ThemeEditor';
 
 const DEFAULT_LOCAL_STORAGE_KEY = 'puck-editor-data';
 const ACTION_TYPE_SET_DATA = 'setData';
@@ -30,6 +31,19 @@ export const PuckEditor = ({
 	const [showPreview, setShowPreview] = useState(false);
 	const [currentData, setCurrentData] = useState(data);
 	const [previewData, setPreviewData] = useState(data);
+	const [showThemeEditor, setShowThemeEditor] = useState(false);
+	const [currentTheme, setCurrentTheme] = useState<PuckTheme>(() => {
+		// Try to load from localStorage first
+		const savedTheme = getTheme();
+		if (savedTheme !== defaultPuckTheme) {
+			return savedTheme;
+		}
+		// Fall back to options theme or default
+		if (options.theme?.theme) {
+			return mergeThemes(defaultPuckTheme, options.theme.theme);
+		}
+		return defaultPuckTheme;
+	});
 
 	const config: Config = useMemo(
 		() => createPuckConfig(options) as unknown as Config,
@@ -42,14 +56,7 @@ export const PuckEditor = ({
 	const enableLocalStorage = options.enableLocalStorage ?? false;
 	const localStorageKey = options.localStorageKey || DEFAULT_LOCAL_STORAGE_KEY;
 
-	const theme = useMemo(() => {
-		if (options.theme?.theme) {
-			return mergeThemes(defaultPuckTheme, options.theme.theme);
-		}
-		return defaultPuckTheme;
-	}, [options.theme]);
-
-	const themeStyles = useMemo(() => applyTheme(theme), [theme]);
+	const themeStyles = useMemo(() => applyTheme(currentTheme), [currentTheme]);
 	const themeClassName = options.theme?.className || '';
 	const customCss = options.theme?.customCss;
 
@@ -116,6 +123,11 @@ export const PuckEditor = ({
 		const dataToSave = latestDataRef.current;
 		await saveData(dataToSave);
 	}, [saveData]);
+
+	const handleSetTheme = useCallback((newTheme: PuckTheme) => {
+		setCurrentTheme(newTheme);
+		setTheme(newTheme);
+	}, []);
 
 	const headerStyle = useMemo(
 		() => ({
@@ -222,6 +234,14 @@ export const PuckEditor = ({
 						<div></div>
 						<button
 							type='button'
+							onClick={() => setShowThemeEditor(true)}
+							style={saveButtonStyle}
+						>
+							<Palette size={14} />
+							Theme
+						</button>
+						<button
+							type='button'
 							onClick={handlePreview}
 							style={previewButtonStyle}
 						>
@@ -259,6 +279,12 @@ export const PuckEditor = ({
 					<PuckRenderer data={previewData} options={options} />
 				</div>
 			)}
+			<ThemeEditor
+				showThemeEditor={showThemeEditor}
+				setShowThemeEditor={setShowThemeEditor}
+				theme={currentTheme}
+				setTheme={handleSetTheme}
+			/>
 		</div>
 	);
 };

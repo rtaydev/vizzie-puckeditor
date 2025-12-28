@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { PuckTheme } from '../config/types';
+import { defaultPuckTheme } from '../config/defaultTheme';
 
 export const applyTheme = (theme: PuckTheme): CSSProperties => {
 	return {
@@ -66,24 +67,32 @@ export const mergeThemes = (
 	return {
 		colors: {
 			...base.colors,
-			...(override.colors as Partial<PuckTheme['colors']> || {}),
+			...((override.colors as Partial<PuckTheme['colors']>) || {}),
 		},
 		typography: {
 			...base.typography,
-			...(override.typography as Partial<PuckTheme['typography']> || {}),
+			...((override.typography as Partial<PuckTheme['typography']>) || {}),
 		},
 		spacing: {
 			...base.spacing,
-			...(override.spacing as Partial<PuckTheme['spacing']> || {}),
+			...((override.spacing as Partial<PuckTheme['spacing']>) || {}),
 		},
 		borderRadius: {
 			...base.borderRadius,
-			...(override.borderRadius as Partial<PuckTheme['borderRadius']> || {}),
+			...((override.borderRadius as Partial<PuckTheme['borderRadius']>) || {}),
 		},
 		shadows: {
 			...base.shadows,
-			...(override.shadows as Partial<PuckTheme['shadows']> || {}),
+			...((override.shadows as Partial<PuckTheme['shadows']>) || {}),
 		},
 	};
 };
 
+export const setTheme = (theme: PuckTheme): void => {
+	localStorage.setItem('puck-theme', JSON.stringify(theme));
+};
+
+export const getTheme = (): PuckTheme => {
+	const theme = localStorage.getItem('puck-theme');
+	return theme ? JSON.parse(theme) : defaultPuckTheme;
+};
