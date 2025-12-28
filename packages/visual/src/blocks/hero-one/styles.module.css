@@ -1,13 +1,6 @@
-/* Container */
-.container {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 0 var(--puck-spacing-md);
-}
-
 /* Grid Layout */
 .heroGrid {
-	display: grid;
+	composes: grid from '../../shared.module.css';
 	grid-template-columns: 1fr;
 	gap: var(--puck-spacing-xl);
 	align-items: center;
@@ -21,10 +14,7 @@
 
 /* Content Column */
 .heroContent {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
+	composes: flexColCenter from '../../shared.module.css';
 }
 
 @media (min-width: 1024px) {
@@ -46,27 +36,24 @@
 
 /* Heading */
 .heading {
-	margin: var(--puck-spacing-lg) 0;
 	font-size: clamp(2.25rem, 5vw, 3.75rem);
 	font-weight: var(--puck-font-weight-bold);
 	line-height: 1.2;
 	color: var(--puck-color-text);
+	margin: var(--puck-spacing-lg) 0;
 }
 
 /* Description */
 .description {
+	composes: description from '../../shared.module.css';
 	margin-bottom: var(--puck-spacing-xl);
 	max-width: 36rem;
 	font-size: 1.25rem;
-	color: var(--puck-color-text-secondary);
-	line-height: 1.6;
 }
 
 /* Buttons Container */
 .buttonsContainer {
-	display: flex;
-	width: 100%;
-	flex-direction: column;
+	composes: flexCol w100 from '../../shared.module.css';
 	gap: var(--puck-spacing-sm);
 	justify-content: center;
 }
@@ -81,62 +68,4 @@
 	.buttonsContainer {
 		justify-content: flex-start;
 	}
-}
-
-/* Primary Button */
-.primaryButton {
-	display: inline-block;
-	padding: 0.625rem var(--puck-spacing-lg);
-	background: var(--puck-color-button-primary);
-	color: var(--puck-color-button-primary-text);
-	border-radius: var(--puck-border-radius-md);
-	text-decoration: none;
-	font-weight: var(--puck-font-weight-medium);
-	text-align: center;
-	transition: all 0.2s;
-}
-
-.primaryButton:hover {
-	opacity: 0.9;
-}
-
-/* Secondary Button */
-.secondaryButton {
-	display: inline-flex;
-	align-items: center;
-	gap: var(--puck-spacing-sm);
-	padding: 0.625rem var(--puck-spacing-lg);
-	background: transparent;
-	color: var(--puck-color-text);
-	border: 2px solid var(--puck-color-border);
-	border-radius: var(--puck-border-radius-md);
-	text-decoration: none;
-	font-weight: var(--puck-font-weight-medium);
-	text-align: center;
-	transition: all 0.2s;
-}
-
-.secondaryButton:hover {
-	border-color: var(--puck-color-border-secondary);
-	opacity: 0.8;
-}
-
-/* Image Container */
-.imageContainer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-/* Image */
-.image {
-	max-height: 24rem;
-	width: 100%;
-	border-radius: var(--puck-border-radius-md);
-	object-fit: cover;
-}
-
-/* Hide labelIcon for HeroOneBlock fields only */
-:global(.hideLabelIcon) {
-	display: none !important;
 }

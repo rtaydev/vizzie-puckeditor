@@ -8,7 +8,10 @@ import { defaultPuckTheme } from '../config/defaultTheme';
 import { applyTheme, mergeThemes } from '../utils/theme';
 import { useMemo } from 'react';
 
-export const PuckRenderer = ({ data, options = {} }: PuckRendererProps): ReactElement => {
+export const PuckRenderer = ({
+	data,
+	options = {},
+}: PuckRendererProps): ReactElement => {
 	const config: Config = useMemo(
 		() => createPuckConfig(options) as unknown as Config,
 		[options]
@@ -22,7 +25,8 @@ export const PuckRenderer = ({ data, options = {} }: PuckRendererProps): ReactEl
 	}, [options.theme]);
 
 	const themeStyles = useMemo(() => applyTheme(theme), [theme]);
-	const themeClassName = options.theme?.className || '';
+	const themeClassName =
+		`${options.theme?.className} puck-renderer` || 'puck-renderer';
 	const customCss = options.theme?.customCss;
 
 	return (

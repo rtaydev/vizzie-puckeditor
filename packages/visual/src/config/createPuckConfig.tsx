@@ -16,6 +16,9 @@ import { HeroOneBlock } from '../blocks/hero-one';
 import { HeroTwoBlock } from '../blocks/hero-two';
 import { HeroThreeBlock } from '../blocks/hero-three';
 import { FeaturesOneBlock } from '../blocks/features/one';
+import { FeaturesTwoBlock } from '../blocks/features/two';
+import { ContactOneBlock } from '../blocks/contact/one';
+import { PricingOneBlock } from '../blocks/pricing/one';
 
 export const createPuckConfig = (options: PuckOptions): Config => {
 	return {
@@ -36,6 +39,9 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 			HeroTwoBlock,
 			HeroThreeBlock,
 			FeaturesOneBlock,
+			FeaturesTwoBlock,
+			ContactOneBlock,
+			PricingOneBlock,
 		},
 		categories: {
 			typography: {
@@ -59,6 +65,9 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 					'HeroTwoBlock',
 					'HeroThreeBlock',
 					'FeaturesOneBlock',
+					'FeaturesTwoBlock',
+					'ContactOneBlock',
+					'PricingOneBlock',
 				],
 				defaultExpanded: false,
 			},

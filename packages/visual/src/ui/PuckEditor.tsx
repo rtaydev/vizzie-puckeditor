@@ -57,7 +57,8 @@ export const PuckEditor = ({
 	const localStorageKey = options.localStorageKey || DEFAULT_LOCAL_STORAGE_KEY;
 
 	const themeStyles = useMemo(() => applyTheme(currentTheme), [currentTheme]);
-	const themeClassName = options.theme?.className || '';
+	const themeClassName =
+		`${options.theme?.className} puck-editor` || 'puck-editor';
 	const customCss = options.theme?.customCss;
 
 	useEffect(() => {

@@ -191,8 +191,7 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionStyle?.paddingTop}
-				paddingBottom={sectionStyle?.paddingBottom}
+				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}
 			>
@@ -228,5 +227,5 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 	},
 };
 
-export const ButtonBlock: ComponentConfig<ButtonProps> = withLayout(ButtonInner);
-
+export const ButtonBlock: ComponentConfig<ButtonProps> =
+	withLayout(ButtonInner);

@@ -68,8 +68,7 @@ const TextInner: ComponentConfig<TextProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionStyle?.paddingTop}
-				paddingBottom={sectionStyle?.paddingBottom}
+				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth || maxWidth}
 			>

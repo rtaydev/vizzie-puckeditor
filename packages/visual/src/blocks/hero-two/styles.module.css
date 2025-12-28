@@ -1,59 +1,18 @@
-/* Container */
-.container {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 0 var(--puck-spacing-md);
-	text-align: center;
-}
-
-/* Content */
 .content {
+	composes: flexCol from '../../shared.module.css';
 	margin: 0 auto;
 	max-width: 80rem;
-	display: flex;
-	flex-direction: column;
 	gap: var(--puck-spacing-md);
-}
-
-/* Heading */
-.heading {
-	font-size: clamp(1.875rem, 5vw, 3.75rem);
-	font-weight: var(--puck-font-weight-bold);
-	color: var(--puck-color-text);
-	line-height: 1.2;
 }
 
 /* Description */
 .description {
-	color: var(--puck-color-text-secondary);
+	composes: description from '../../shared.module.css';
 	font-size: 1rem;
-	line-height: 1.6;
 }
 
 @media (min-width: 1024px) {
 	.description {
 		font-size: 1.125rem;
 	}
-}
-
-/* Button */
-.button {
-	display: inline-block;
-	margin-top: var(--puck-spacing-xl);
-	padding: var(--puck-spacing-sm) var(--puck-spacing-xl);
-	background: var(--puck-color-button-primary);
-	color: var(--puck-color-button-primary-text);
-	border-radius: var(--puck-border-radius-md);
-	text-decoration: none;
-	font-weight: var(--puck-font-weight-medium);
-	transition: all 0.2s;
-}
-
-.button:hover {
-	opacity: 0.9;
-}
-
-/* Hide labelIcon for HeroTwoBlock fields only */
-:global(.hideHeroTwoLabelIcon) {
-	display: none !important;
 }

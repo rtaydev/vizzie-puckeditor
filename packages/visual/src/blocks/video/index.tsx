@@ -33,10 +33,7 @@ const getYouTubeId = (url: string): string | null => {
 
 // Extract video ID from Vimeo URL
 const getVimeoId = (url: string): string | null => {
-	const patterns = [
-		/(?:vimeo\.com\/)(\d+)/,
-		/(?:vimeo\.com\/video\/)(\d+)/,
-	];
+	const patterns = [/(?:vimeo\.com\/)(\d+)/, /(?:vimeo\.com\/video\/)(\d+)/];
 	for (const pattern of patterns) {
 		const match = url.match(pattern);
 		if (match && match[1]) return match[1];
@@ -162,12 +159,14 @@ const VideoInner: ComponentConfig<VideoProps> = {
 				const videoId = getYouTubeId(url);
 				if (!videoId) return null;
 
-				const embedUrl = `https://www.youtube.com/embed/${videoId}?${new URLSearchParams({
-					autoplay: autoplay ? '1' : '0',
-					loop: loop ? '1' : '0',
-					mute: muted ? '1' : '0',
-					controls: controls ? '1' : '0',
-				}).toString()}`;
+				const embedUrl = `https://www.youtube.com/embed/${videoId}?${new URLSearchParams(
+					{
+						autoplay: autoplay ? '1' : '0',
+						loop: loop ? '1' : '0',
+						mute: muted ? '1' : '0',
+						controls: controls ? '1' : '0',
+					}
+				).toString()}`;
 
 				return (
 					<div
@@ -200,12 +199,14 @@ const VideoInner: ComponentConfig<VideoProps> = {
 				const videoId = getVimeoId(url);
 				if (!videoId) return null;
 
-				const embedUrl = `https://player.vimeo.com/video/${videoId}?${new URLSearchParams({
-					autoplay: autoplay ? '1' : '0',
-					loop: loop ? '1' : '0',
-					muted: muted ? '1' : '0',
-					controls: controls ? '1' : '0',
-				}).toString()}`;
+				const embedUrl = `https://player.vimeo.com/video/${videoId}?${new URLSearchParams(
+					{
+						autoplay: autoplay ? '1' : '0',
+						loop: loop ? '1' : '0',
+						muted: muted ? '1' : '0',
+						controls: controls ? '1' : '0',
+					}
+				).toString()}`;
 
 				return (
 					<div
@@ -275,7 +276,8 @@ const VideoInner: ComponentConfig<VideoProps> = {
 						color: '#9ca3af',
 					}}
 				>
-					Invalid video URL. Please provide a YouTube, Vimeo, or direct video URL.
+					Invalid video URL. Please provide a YouTube, Vimeo, or direct video
+					URL.
 				</div>
 			);
 		};
@@ -283,8 +285,7 @@ const VideoInner: ComponentConfig<VideoProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionStyle?.paddingTop}
-				paddingBottom={sectionStyle?.paddingBottom}
+				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}
 			>
@@ -295,4 +296,3 @@ const VideoInner: ComponentConfig<VideoProps> = {
 };
 
 export const VideoBlock: ComponentConfig<VideoProps> = withLayout(VideoInner);
-

@@ -81,8 +81,7 @@ const ListInner: ComponentConfig<ListProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionStyle?.paddingTop}
-				paddingBottom={sectionStyle?.paddingBottom}
+				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}
 			>

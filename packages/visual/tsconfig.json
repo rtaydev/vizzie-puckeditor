@@ -11,8 +11,8 @@
 		"emitDeclarationOnly": false,
 		"strict": true,
 		"skipLibCheck": true,
-		"outDir": "dist"
+		"outDir": "dist",
+		"plugins": [{ "name": "typescript-plugin-css-modules" }]
 	},
-	"include": ["src", "tsup.config.ts"],
-	"exclude": ["node_modules"]
+	"include": ["src", "tsup.config.ts"]
 }

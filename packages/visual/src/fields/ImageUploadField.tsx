@@ -4,9 +4,9 @@ import { useState, useRef, useEffect } from 'react';
 import type { CustomFieldRender } from '@measured/puck';
 import { Upload } from 'lucide-react';
 
-type ImageUploadFieldProps = Parameters<CustomFieldRender<string | undefined>>[0];
-
-export const ImageUploadField: CustomFieldRender<string | undefined> = (props) => {
+export const ImageUploadField: CustomFieldRender<string | undefined> = (
+	props
+) => {
 	const { value, onChange, field } = props;
 	const [uploading, setUploading] = useState(false);
 	const [preview, setPreview] = useState<string | null>(value || null);
@@ -16,7 +16,9 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 		setPreview(value || null);
 	}, [value]);
 
-	const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleFileSelect = async (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		const file = event.target.files?.[0];
 		if (!file) return;
 
@@ -133,10 +135,7 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 						e.currentTarget.style.background = '#f9fafb';
 					}}
 				>
-					<Upload
-						size={32}
-						style={{ color: '#6b7280', marginBottom: '8px' }}
-					/>
+					<Upload size={32} style={{ color: '#6b7280', marginBottom: '8px' }} />
 					<div style={{ color: '#6b7280', fontSize: '14px' }}>
 						{uploading ? 'Uploading...' : 'Click to upload image'}
 					</div>
@@ -172,4 +171,3 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 		</div>
 	);
 };
-

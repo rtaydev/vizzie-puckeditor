@@ -2,21 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import type { CustomFieldRender } from '@measured/puck';
-import {
-	AlignVerticalJustifyStart,
-	AlignVerticalJustifyCenter,
-	AlignVerticalJustifyEnd,
-	Maximize,
-	Palette,
-} from 'lucide-react';
 import { ChromePicker, type ColorResult } from 'react-color';
 import { spacingOptions } from '../config/options';
 
 type SectionStyleValue = {
 	backgroundColor?: string;
 	backgroundColorCustom?: string;
-	paddingTop?: string;
-	paddingBottom?: string;
+	paddingVertical?: string;
 	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 	maxWidth?: string;
 };
@@ -252,11 +244,12 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 				{/* Padding Top & Bottom */}
 				<div
 					style={{
-						display: 'grid',
-						gridTemplateColumns: '1fr 1fr',
-						gap: '8px',
+						display: 'flex',
+						flexDirection: 'column',
+						gap: '12px',
 					}}
 				>
+					{/* Padding Y */}
 					<div>
 						<label
 							style={{
@@ -267,57 +260,67 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 								color: '#6b7280',
 							}}
 						>
-							Padding Top
+							Vertical Padding
 						</label>
-						<select
-							value={value.paddingTop || '0px'}
-							onChange={(e) => updateValue({ paddingTop: e.target.value })}
+						<div
 							style={{
-								width: '100%',
-								padding: '6px 8px',
-								border: '1px solid #d1d5db',
-								borderRadius: '6px',
-								fontSize: '13px',
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
 							}}
 						>
-							<option value='0px'>0px</option>
-							{spacingOptions.map((opt) => (
-								<option key={opt.value} value={opt.value}>
-									{opt.label}
-								</option>
-							))}
-						</select>
-					</div>
-					<div>
-						<label
-							style={{
-								display: 'block',
-								marginBottom: '6px',
-								fontSize: '12px',
-								fontWeight: '500',
-								color: '#6b7280',
-							}}
-						>
-							Padding Bottom
-						</label>
-						<select
-							value={value.paddingBottom || '0px'}
-							onChange={(e) => updateValue({ paddingBottom: e.target.value })}
-							style={{
-								width: '100%',
-								padding: '6px 8px',
-								border: '1px solid #d1d5db',
-								borderRadius: '6px',
-								fontSize: '13px',
-							}}
-						>
-							<option value='0px'>0px</option>
-							{spacingOptions.map((opt) => (
-								<option key={opt.value} value={opt.value}>
-									{opt.label}
-								</option>
-							))}
-						</select>
+							<input
+								type='range'
+								min='0'
+								max={spacingOptions.length}
+								step='1'
+								value={(() => {
+									const currentValue = value.paddingVertical || '0px';
+									if (currentValue === '0px') return 0;
+									const index = spacingOptions.findIndex(
+										(opt) => opt.value === currentValue
+									);
+									return index >= 0 ? index + 1 : 0;
+								})()}
+								onChange={(e) => {
+									const sliderValue = parseInt(e.target.value);
+									if (sliderValue === 0) {
+										updateValue({ paddingVertical: '0px' });
+									} else {
+										updateValue({
+											paddingVertical: spacingOptions[sliderValue - 1].value,
+										});
+									}
+								}}
+								style={{
+									flex: 1,
+									height: '6px',
+									borderRadius: '3px',
+									background: '#e5e7eb',
+									outline: 'none',
+									cursor: 'pointer',
+								}}
+							/>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									fontSize: '12px',
+									color: '#6b7280',
+								}}
+							>
+								<span
+									style={{
+										fontWeight: '600',
+										color: '#111827',
+									}}
+								>
+									{value.paddingVertical || '0px'}
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
 
