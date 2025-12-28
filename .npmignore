@@ -1,0 +1,6 @@
+   src/
+   *.ts
+   *.tsx
+   tsconfig.json
+   tsup.config.ts
+   .eslintrc
