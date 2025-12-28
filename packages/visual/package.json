@@ -1,6 +1,15 @@
 {
 	"name": "@puck-editor/visual",
-	"version": "0.1.3",
+	"version": "0.1.4",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rtaydev/vizzie-puckeditor.git"
+	},
+	"bugs": {
+		"url": "https://github.com/rtaydev/vizzie-puckeditor/issues"
+	},
+	"homepage": "https://github.com/rtaydev/vizzie-puckeditor#readme",
 	"private": false,
 	"publishConfig": {
 		"access": "public"
