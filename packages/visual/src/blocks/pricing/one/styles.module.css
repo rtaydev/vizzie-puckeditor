@@ -57,7 +57,7 @@
 }
 
 .switch[data-state='checked'] {
-	background-color: var(--puck-color-primary);
+	background-color: var(--puck-color-button-primary);
 }
 
 .switchThumb {

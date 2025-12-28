@@ -1,3 +1,17 @@
+.container {
+	composes: container containerPadded from '../../shared.module.css';
+}
+
+.heading {
+	composes: header from '../../shared.module.css';
+	text-align: left !important;
+	align-items: flex-start;
+}
+
+.description {
+	composes: description from '../../shared.module.css';
+}
+
 /* Grid Layout */
 .heroGrid {
 	composes: grid from '../../shared.module.css';
@@ -12,11 +26,6 @@
 	}
 }
 
-/* Content Column */
-.heroContent {
-	composes: flexColCenter from '../../shared.module.css';
-}
-
 @media (min-width: 1024px) {
 	.heroContent {
 		align-items: flex-start;
@@ -26,6 +35,7 @@
 
 /* Badge */
 .badgeContainer {
+	composes: badge from '../../shared.module.css';
 	margin-bottom: var(--puck-spacing-lg);
 }
 
@@ -53,9 +63,21 @@
 
 /* Buttons Container */
 .buttonsContainer {
-	composes: flexCol w100 from '../../shared.module.css';
+	composes: flexRow w100 from '../../shared.module.css';
 	gap: var(--puck-spacing-sm);
 	justify-content: center;
+}
+
+.primaryButton {
+	composes: button from '../../shared.module.css';
+	background-color: var(--puck-color-button-primary);
+	color: var(--puck-color-button-primary-text);
+}
+
+.secondaryButton {
+	background-color: var(--puck-color-button-secondary) !important;
+	color: var(--puck-color-button-secondary-text) !important;
+	composes: button from '../../shared.module.css';
 }
 
 @media (min-width: 640px) {

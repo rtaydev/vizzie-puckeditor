@@ -8,6 +8,8 @@
 	composes: flex flexCol flexCenter from '../../../shared.module.css';
 	margin: 0 auto var(--puck-spacing-lg);
 	max-width: 48rem;
+	text-align: center !important;
+	align-items: center !important;
 }
 
 /* Title */
@@ -68,7 +70,7 @@
 /* Button Wrapper */
 .buttonWrapper {
 	composes: flexCenter from '../../../shared.module.css';
-	margin-top: var(--puck-spacing-lg);
+	margin-top: var(--puck-spacing-xl);
 }
 
 /* Button */
