@@ -8,6 +8,7 @@ import {
 } from '../../config/sectionFields';
 import { ColorPickerField } from '../../fields/ColorPickerField';
 import { RemSliderField } from '../../fields/RemSliderField';
+import styles from './styles.module.css';
 
 export type ListProps = WithLayout<
 	SectionStyleProps & {
@@ -81,12 +82,12 @@ const ListInner: ComponentConfig<ListProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionStyle?.paddingTop}
-				paddingBottom={sectionStyle?.paddingBottom}
+				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}
 			>
 				<ListTag
+					className={styles.list}
 					style={{
 						fontSize: `${size}rem`,
 						color: color || '#000000',

@@ -81,8 +81,7 @@ const IconInner: ComponentConfig<IconProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionStyle?.paddingTop}
-				paddingBottom={sectionStyle?.paddingBottom}
+				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}
 			>
@@ -124,4 +123,3 @@ const IconInner: ComponentConfig<IconProps> = {
 };
 
 export const IconBlock: ComponentConfig<IconProps> = withLayout(IconInner);
-

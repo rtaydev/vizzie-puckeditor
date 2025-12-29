@@ -69,7 +69,7 @@ export default function Home() {
 	}
 
 	return (
-		<div className='h-screen'>
+		<div>
 			<PuckEditor
 				data={data}
 				onPublish={handlePublish}

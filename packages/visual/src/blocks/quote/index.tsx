@@ -126,8 +126,7 @@ const QuoteInner: ComponentConfig<QuoteProps> = {
 		return (
 			<Section
 				backgroundColor={sectionBackgroundColor}
-				paddingTop={sectionStyle?.paddingTop}
-				paddingBottom={sectionStyle?.paddingBottom}
+				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}
 			>

@@ -162,11 +162,13 @@
 	padding: 16px 24px;
 	border-top: 1px solid #e5e7eb;
 	background: #f9fafb;
-	justify-content: flex-end;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .submitBtn,
-.cancelBtn {
+.cancelBtn,
+.resetBtn {
 	padding: 10px 20px;
 	border-radius: 6px;
 	border: none;
@@ -178,12 +180,12 @@
 }
 
 .submitBtn {
-	background-color: #3b82f6;
-	color: white;
+	background-color: var(--puck-color-button-primary);
+	color: var(--puck-color-button-primary-text);
 }
 
 .submitBtn:hover {
-	background-color: #2563eb;
+	opacity: 0.9;
 	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
@@ -192,16 +194,27 @@
 }
 
 .cancelBtn {
-	background-color: white;
-	color: #374151;
-	border: 1px solid #e5e7eb;
+	background-color: var(--puck-color-button-secondary);
+	color: var(--puck-color-button-secondary-text);
 }
 
 .cancelBtn:hover {
-	background-color: #f3f4f6;
-	border-color: #d1d5db;
+	opacity: 0.9;
 }
 
 .cancelBtn:active {
+	transform: scale(0.98);
+}
+
+.resetBtn {
+	background-color: black;
+	color: white;
+}
+
+.resetBtn:hover {
+	opacity: 0.9;
+}
+
+.resetBtn:active {
 	transform: scale(0.98);
 }

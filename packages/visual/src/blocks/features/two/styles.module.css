@@ -1,0 +1,139 @@
+.container {
+	composes: container containerPadded from '../../../shared.module.css';
+}
+
+.grid {
+	composes: flex w100 from '../../../shared.module.css';
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: var(--puck-spacing-md);
+	margin-bottom: var(--puck-spacing-md);
+}
+
+.accordionWrapper {
+	width: 100%;
+}
+
+.accordion {
+	width: 100%;
+}
+
+.accordionItem {
+	border-bottom: 1px solid var(--puck-color-border);
+	transition: opacity 0.3s;
+}
+
+.accordionItem:hover {
+	opacity: 0.8;
+}
+
+.accordionTrigger {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	padding: var(--puck-spacing-md) 0;
+	transition: all 0.3s;
+	background: transparent;
+	border: none;
+	text-align: left;
+}
+
+.accordionTitle {
+	font-size: var(--puck-font-size-large);
+	line-height: var(--puck-line-height-large);
+	font-weight: var(--puck-font-weight-bold);
+	color: var(--puck-color-text-secondary);
+	transition: color 0.3s;
+}
+
+.accordionTitleActive {
+	font-size: var(--puck-font-size-large);
+	line-height: var(--puck-line-height-large);
+	font-weight: var(--puck-font-weight-bold);
+	color: var(--puck-color-text);
+	transition: color 0.3s;
+}
+
+.accordionIcon {
+	width: 1rem;
+	height: 1rem;
+	flex-shrink: 0;
+	transition: transform 0.3s;
+	transform: rotate(-90deg);
+}
+
+.accordionIconActive {
+	width: 1rem;
+	height: 1rem;
+	flex-shrink: 0;
+	transition: transform 0.3s;
+	transform: rotate(0deg);
+}
+
+.accordionContent {
+	overflow: hidden;
+	animation: slideDown 0.3s ease-out;
+	padding-bottom: 1.25rem;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		max-height: 0;
+	}
+	to {
+		opacity: 1;
+		max-height: 500px;
+	}
+}
+
+.accordionDescription {
+	font-size: 1rem;
+	line-height: 1.5rem;
+	color: var(--puck-color-text-secondary);
+}
+
+.mobileImage {
+	margin-top: 1rem;
+	display: block;
+}
+
+.mobileImageElement {
+	height: 100%;
+	max-height: 20rem;
+	width: 100%;
+	border-radius: 0.375rem;
+	object-fit: cover;
+}
+
+.imageWrapper {
+	position: relative;
+	margin: auto;
+	display: none;
+	width: 50%;
+	overflow: hidden;
+	border-radius: var(--puck-border-radius-md);
+}
+
+.image {
+	aspect-ratio: 4 / 3;
+	border-radius: var(--puck-border-radius-md);
+	object-fit: cover;
+	padding-left: var(--puck-spacing-md);
+}
+
+@media (min-width: 768px) {
+	.accordionWrapper {
+		width: 50%;
+	}
+
+	.imageWrapper {
+		display: block;
+	}
+
+	.mobileImage {
+		display: none;
+	}
+}

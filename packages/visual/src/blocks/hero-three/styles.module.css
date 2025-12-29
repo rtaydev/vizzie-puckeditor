@@ -1,18 +1,14 @@
-/* Container */
 .container {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 0 var(--puck-spacing-md);
+	composes: container from '../../shared.module.css';
+	gap: var(--puck-spacing-xl) !important;
 }
 
-/* Header */
 .header {
-	margin: 0 auto var(--puck-spacing-lg);
-	max-width: 80rem;
-	display: flex;
-	flex-direction: column;
-	gap: var(--puck-spacing-md);
-	text-align: center;
+	composes: heading from '../../shared.module.css';
+}
+
+.heading {
+	composes: title flexCenter from '../../shared.module.css';
 }
 
 /* Badge */
@@ -26,18 +22,11 @@
 	color: var(--puck-color-text-secondary);
 }
 
-/* Heading */
-.heading {
-	font-size: clamp(1.875rem, 5vw, 3.75rem);
-	font-weight: var(--puck-font-weight-bold);
-	color: var(--puck-color-text);
-	line-height: 1.2;
-}
-
 /* Image */
 .imageWrapper {
 	position: relative;
-	margin-bottom: var(--puck-spacing-lg);
+	margin-top: var(--puck-spacing-xl);
+	margin-bottom: var(--puck-spacing-xl);
 	max-width: 80rem;
 	margin-left: auto;
 	margin-right: auto;
@@ -106,8 +95,7 @@
 
 /* Features Container */
 .featuresContainer {
-	display: flex;
-	flex-direction: column;
+	composes: flexRow from '../../shared.module.css';
 	max-width: 80rem;
 	margin: var(--puck-spacing-lg) auto 0;
 	gap: 0;
@@ -122,9 +110,8 @@
 
 /* Feature Item */
 .featureItem {
+	composes: flexCol from '../../shared.module.css';
 	flex: 1;
-	display: flex;
-	flex-direction: column;
 	border-radius: var(--puck-border-radius-md);
 	background: var(--puck-color-background);
 	padding: var(--puck-spacing-md);
@@ -153,12 +140,9 @@
 
 /* Icon Wrapper */
 .iconWrapper {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	composes: iconWrapper from '../../shared.module.css';
 	width: 2.5rem;
 	height: 2.5rem;
-	border-radius: 9999px;
 	background: var(--puck-color-background);
 	filter: drop-shadow(0 10px 15px -3px rgba(0, 0, 0, 0.1));
 	margin-bottom: var(--puck-spacing-md);
@@ -176,9 +160,4 @@
 	font-size: 0.875rem;
 	color: var(--puck-color-text-secondary);
 	line-height: 1.6;
-}
-
-/* Hide labelIcon for HeroThreeBlock fields only */
-:global(.hideHeroThreeLabelIcon) {
-	display: none !important;
 }

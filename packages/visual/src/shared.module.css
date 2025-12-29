@@ -1,0 +1,140 @@
+/* ============================================
+   SHARED UTILITY STYLES
+   Extracted from duplicated patterns across CSS modules
+   ============================================ */
+
+/* Containers & Layout */
+.container {
+	max-width: 1280px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.containerPadded {
+	padding: 0 var(--puck-spacing-md);
+}
+
+/* Flex utilities */
+.flexCenter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.flexCol {
+	display: flex;
+	flex-direction: column;
+}
+
+.flexRow {
+	display: flex;
+	flex-direction: row;
+}
+
+.flexColCenter {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.flex {
+	display: flex;
+}
+
+.flexWrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+/* Header patterns */
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--puck-spacing-lg);
+	text-align: center;
+	margin-bottom: var(--puck-spacing-lg);
+}
+
+.headerBase {
+	margin-bottom: 3.5rem;
+}
+
+/* Typography - Heading/Title patterns */
+.heading {
+	font-size: var(--puck-font-size-large);
+	font-weight: var(--puck-font-weight-bold);
+	line-height: 1.2;
+	color: var(--puck-color-text);
+}
+
+.title {
+	font-size: clamp(1.875rem, 5vw, 3.75rem);
+	font-weight: var(--puck-font-weight-bold);
+	color: var(--puck-color-text);
+	line-height: 1.2;
+}
+
+/* Description/Text patterns */
+.description {
+	color: var(--puck-color-text-secondary);
+	font-size: var(--puck-font-size-normal);
+	line-height: 1.6;
+}
+
+.descriptionMuted {
+	color: var(--text-muted, #6b7280);
+	line-height: 1.75;
+}
+
+/* Button patterns */
+.button {
+	display: flex;
+	padding: var(--puck-spacing-sm) var(--puck-spacing-xl);
+	background: var(--puck-color-button-primary);
+	color: var(--puck-color-button-primary-text);
+	border-radius: var(--puck-border-radius-md);
+	text-decoration: none;
+	font-weight: var(--puck-font-weight-medium);
+	transition: all 0.2s;
+	justify-content: center;
+	align-items: center;
+	gap: var(--puck-spacing-sm);
+}
+
+.button:hover {
+	opacity: 0.9;
+}
+
+/* Card patterns */
+.card {
+	border-radius: 0.5rem;
+	background-color: var(--bg-muted, #f9fafb);
+	padding: 1.5rem;
+}
+
+/* Icon wrapper base */
+.iconWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 9999px;
+}
+
+/* Display utilities */
+.block {
+	display: block;
+}
+
+.grid {
+	display: grid;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.h100 {
+	height: 100%;
+}

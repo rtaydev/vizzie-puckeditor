@@ -12,6 +12,8 @@ const config: Options = {
 	},
 	sourcemap: true,
 	clean: true,
+	minify: true,
+	css: true,
 	external: ['react', 'react-dom', '@measured/puck'],
 	esbuildPlugins: [
 		{

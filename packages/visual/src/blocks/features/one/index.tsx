@@ -11,7 +11,6 @@ import {
 } from '../../../config/sectionFields';
 import styles from './styles.module.css';
 import { IconPickerField } from '../../../fields/IconPickerField';
-import type { CustomFieldRender } from '@measured/puck';
 
 interface Feature {
 	heading: string;
@@ -176,8 +175,7 @@ const FeaturesOneInner: ComponentConfig<FeaturesOneProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionStyle?.paddingTop || '0rem'}
-				paddingBottom={sectionStyle?.paddingBottom || '0rem'}
+				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth || '100%'}
 			>

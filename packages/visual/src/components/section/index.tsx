@@ -16,8 +16,7 @@ export type SectionProps = {
 	maxWidth?: string;
 	style?: CSSProperties;
 	backgroundColor?: string;
-	paddingTop?: string;
-	paddingBottom?: string;
+	paddingVertical?: string;
 	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 };
 
@@ -29,8 +28,7 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
 			maxWidth = '100%',
 			style = {},
 			backgroundColor,
-			paddingTop,
-			paddingBottom,
+			paddingVertical,
 			alignItems,
 		},
 		ref
@@ -53,8 +51,7 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
 		const sectionStyle: CSSProperties = {
 			...style,
 			...(shouldUseInlineBackground && { backgroundColor }),
-			...(paddingTop && { paddingTop }),
-			...(paddingBottom && { paddingBottom }),
+			...(paddingVertical && { paddingBlock: paddingVertical }),
 		};
 
 		const innerStyle: CSSProperties = {
