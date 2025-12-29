@@ -1,0 +1,76 @@
+.container {
+	composes: container from '../../../shared.module.css';
+}
+
+.header {
+	composes: headerBase from '../../../shared.module.css';
+}
+
+.title {
+	composes: title from '../../../shared.module.css';
+	text-wrap: balance;
+	margin-top: 0.5rem;
+	margin-bottom: 0.75rem;
+}
+
+@media (min-width: 768px) {
+	.title {
+		font-size: 2.25rem;
+	}
+}
+
+.description {
+	composes: descriptionMuted from '../../../shared.module.css';
+	max-width: 36rem;
+	font-size: 1.125rem;
+}
+
+.grid {
+	composes: grid from '../../../shared.module.css';
+	gap: 1.5rem;
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+	.grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.card {
+	composes: card from '../../../shared.module.css';
+}
+
+.iconWrapper {
+	composes: flexCol flexCenter from '../../../shared.module.css';
+	margin-bottom: 0.75rem;
+	height: 3rem;
+	width: 3rem;
+	border-radius: 9999px;
+	background-color: var(--bg-accent, #e5e7eb);
+}
+
+.icon {
+	height: 1.5rem;
+	width: auto;
+}
+
+.label {
+	margin-bottom: 0.5rem;
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+
+.cardDescription {
+	margin-bottom: 0.75rem;
+	color: var(--text-muted, #6b7280);
+}
+
+.link {
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.link:hover {
+	text-decoration: underline;
+}

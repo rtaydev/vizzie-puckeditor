@@ -99,8 +99,7 @@ const HeroTwoInner: ComponentConfig<HeroTwoProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				paddingTop={sectionStyle?.paddingTop || '0rem'}
-				paddingBottom={sectionStyle?.paddingBottom || '0rem'}
+				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth || '100%'}
 			>

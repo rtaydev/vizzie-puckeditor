@@ -4,8 +4,7 @@ import { SectionStyleField } from '../fields/SectionStyleField';
 export type SectionStyleValue = {
 	backgroundColor?: string;
 	backgroundColorCustom?: string;
-	paddingTop?: string;
-	paddingBottom?: string;
+	paddingVertical?: string;
 	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 	maxWidth?: string;
 };
