@@ -90,7 +90,7 @@
 
 /* Button patterns */
 .button {
-	display: flex;
+	display: inline-block;
 	padding: var(--puck-spacing-sm) var(--puck-spacing-xl);
 	background: var(--puck-color-button-primary);
 	color: var(--puck-color-button-primary-text);
@@ -98,9 +98,6 @@
 	text-decoration: none;
 	font-weight: var(--puck-font-weight-medium);
 	transition: all 0.2s;
-	justify-content: center;
-	align-items: center;
-	gap: var(--puck-spacing-sm);
 }
 
 .button:hover {

@@ -25,12 +25,23 @@ export const PuckRenderer = ({
 		return defaultPuckTheme;
 	});
 
+export const PuckRenderer = ({
+	data,
+	options = {},
+}: PuckRendererProps): ReactElement => {
 	const config: Config = useMemo(
 		() => createPuckConfig(options) as unknown as Config,
 		[options]
 	);
 
-	const themeStyles = useMemo(() => applyTheme(currentTheme), [currentTheme]);
+	const theme = useMemo(() => {
+		if (options.theme?.theme) {
+			return mergeThemes(defaultPuckTheme, options.theme.theme);
+		}
+		return defaultPuckTheme;
+	}, [options.theme]);
+
+	const themeStyles = useMemo(() => applyTheme(theme), [theme]);
 	const themeClassName =
 		`${options.theme?.className} puck-renderer` || 'puck-renderer';
 	const customCss = options.theme?.customCss;
