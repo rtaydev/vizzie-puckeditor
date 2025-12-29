@@ -19,6 +19,7 @@ import { FeaturesOneBlock } from '../blocks/features/one';
 import { FeaturesTwoBlock } from '../blocks/features/two';
 import { ContactOneBlock } from '../blocks/contact/one';
 import { PricingOneBlock } from '../blocks/pricing/one';
+import { DynamicItemBlock } from '../blocks/dynamic-item-block';
 
 export const createPuckConfig = (options: PuckOptions): Config => {
 	return {
@@ -42,6 +43,7 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 			FeaturesTwoBlock,
 			ContactOneBlock,
 			PricingOneBlock,
+			DynamicItemBlock,
 		},
 		categories: {
 			typography: {
@@ -56,7 +58,7 @@ export const createPuckConfig = (options: PuckOptions): Config => {
 				defaultExpanded: false,
 			},
 			interactive: {
-				components: ['ButtonBlock'],
+				components: ['ButtonBlock', 'DynamicItemBlock'],
 				defaultExpanded: false,
 			},
 			templates: {
