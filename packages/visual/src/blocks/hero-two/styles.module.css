@@ -1,14 +1,39 @@
+.container {
+	composes: container containerPadded flexCol from '../../shared.module.css';
+	gap: var(--puck-spacing-xl) !important;
+}
+
 .content {
-	composes: flexCol from '../../shared.module.css';
+	composes: flexCol containerPadded flexCenter from '../../shared.module.css';
 	margin: 0 auto;
 	max-width: 80rem;
-	gap: var(--puck-spacing-md);
+	gap: var(--puck-spacing-md) !important;
+}
+
+.heading {
+	composes: title from '../../shared.module.css';
+	text-align: center !important;
+	align-items: center !important;
 }
 
 /* Description */
 .description {
 	composes: description from '../../shared.module.css';
 	font-size: 1rem;
+	text-align: center !important;
+	margin-bottom: var(--puck-spacing-md) !important;
+}
+
+.button {
+	composes: button from '../../shared.module.css';
+	background-color: var(--puck-color-button-primary);
+	color: var(--puck-color-button-primary-text);
+	display: inline-block !important;
+	align-self: center !important;
+}
+
+.button:hover {
+	opacity: 0.9;
 }
 
 @media (min-width: 1024px) {

@@ -8,6 +8,8 @@
 	composes: flex flexCol flexCenter from '../../../shared.module.css';
 	margin: 0 auto var(--puck-spacing-lg);
 	max-width: 48rem;
+	text-align: center !important;
+	align-items: center !important;
 }
 
 /* Title */

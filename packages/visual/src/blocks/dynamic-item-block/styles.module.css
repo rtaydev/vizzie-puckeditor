@@ -1,0 +1,31 @@
+.containerStyle {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+}
+
+.gridContainerStyle {
+    grid-template-columns: repeat(itemsPerRow, 1fr);
+}
+
+.flexTableContainerStyle {
+    border-collapse: collapse;
+}
+
+.flexColumnContainerStyle {
+    flex-direction: column;
+}
+
+.containerStyleGrid {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+}
+
+.containerStyleTable,
+.containerStyleFlex {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}

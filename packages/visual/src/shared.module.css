@@ -26,6 +26,11 @@
 	flex-direction: column;
 }
 
+.flexRow {
+	display: flex;
+	flex-direction: row;
+}
+
 .flexColCenter {
 	display: flex;
 	flex-direction: column;

@@ -2,11 +2,28 @@
 
 import type { ReactElement } from 'react';
 import { Render, Config } from '@measured/puck';
-import { PuckRendererProps } from '../config/types';
+import { PuckRendererProps, PuckTheme } from '../config/types';
 import { createPuckConfig } from '../config/createPuckConfig';
 import { defaultPuckTheme } from '../config/defaultTheme';
-import { applyTheme, mergeThemes } from '../utils/theme';
-import { useMemo } from 'react';
+import { applyTheme, getTheme, mergeThemes } from '../utils/theme';
+import { useMemo, useState } from 'react';
+
+export const PuckRenderer = ({
+	data,
+	options = {},
+}: PuckRendererProps): ReactElement => {
+	const [currentTheme, setCurrentTheme] = useState<PuckTheme>(() => {
+		// Try to load from localStorage first
+		const savedTheme = getTheme();
+		if (savedTheme !== defaultPuckTheme) {
+			return savedTheme;
+		}
+		// Fall back to options theme or default
+		if (options.theme?.theme) {
+			return mergeThemes(defaultPuckTheme, options.theme.theme);
+		}
+		return defaultPuckTheme;
+	});
 
 export const PuckRenderer = ({
 	data,

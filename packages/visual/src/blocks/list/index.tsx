@@ -8,6 +8,7 @@ import {
 } from '../../config/sectionFields';
 import { ColorPickerField } from '../../fields/ColorPickerField';
 import { RemSliderField } from '../../fields/RemSliderField';
+import styles from './styles.module.css';
 
 export type ListProps = WithLayout<
 	SectionStyleProps & {
@@ -86,6 +87,7 @@ const ListInner: ComponentConfig<ListProps> = {
 				maxWidth={sectionStyle?.maxWidth}
 			>
 				<ListTag
+					className={styles.list}
 					style={{
 						fontSize: `${size}rem`,
 						color: color || '#000000',

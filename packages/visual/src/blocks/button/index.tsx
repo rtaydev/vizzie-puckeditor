@@ -8,6 +8,7 @@ import {
 } from '../../config/sectionFields';
 import { ColorPickerField } from '../../fields/ColorPickerField';
 import { RemSliderField } from '../../fields/RemSliderField';
+import styles from './styles.module.css';
 
 export type ButtonProps = WithLayout<
 	SectionStyleProps & {
@@ -92,7 +93,7 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 		link: '',
 		variant: 'primary',
 		size: 'medium',
-		color: '#000000',
+		color: 'var(--puck-color-button-primary)',
 		align: 'center',
 		fullWidth: false,
 		fontSize: 1,
@@ -115,14 +116,14 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 
 		// Size styles
 		const sizeStyles = {
-			small: { padding: '6px 16px', fontSize: `${fontSize * 0.875}rem` },
-			medium: { padding: '10px 24px', fontSize: `${fontSize}rem` },
-			large: { padding: '14px 32px', fontSize: `${fontSize * 1.125}rem` },
+			small: { fontSize: `${fontSize * 0.875}rem` },
+			medium: { fontSize: `${fontSize}rem` },
+			large: { fontSize: `${fontSize * 1.125}rem` },
 		};
 
 		// Variant styles
 		const getVariantStyles = () => {
-			const baseColor = color || '#000000';
+			const baseColor = color || 'var(--puck-color-button-primary)';
 			switch (variant) {
 				case 'primary':
 					return {
@@ -166,13 +167,8 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 				style={{
 					...currentSizeStyles,
 					...variantStyles,
-					borderRadius: '6px',
-					cursor: 'pointer',
-					fontWeight: 500,
-					transition: 'all 0.2s',
-					width: fullWidth ? '100%' : 'auto',
-					display: 'inline-block',
 				}}
+				className={styles.button}
 				onMouseEnter={(e) => {
 					if (variant === 'primary') {
 						e.currentTarget.style.opacity = '0.9';
@@ -208,14 +204,7 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 					}}
 				>
 					{link ? (
-						<a
-							href={link}
-							style={{
-								textDecoration: 'none',
-								display: fullWidth ? 'block' : 'inline-block',
-								width: fullWidth ? '100%' : 'auto',
-							}}
-						>
+						<a href={link} className={styles.button}>
 							{buttonElement}
 						</a>
 					) : (

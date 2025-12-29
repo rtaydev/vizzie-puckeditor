@@ -1,0 +1,5 @@
+.button {
+	border: none !important;
+	cursor: pointer !important;
+	composes: button from '../../shared.module.css';
+}
