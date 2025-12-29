@@ -12,23 +12,6 @@ export const PuckRenderer = ({
 	data,
 	options = {},
 }: PuckRendererProps): ReactElement => {
-	const [currentTheme, setCurrentTheme] = useState<PuckTheme>(() => {
-		// Try to load from localStorage first
-		const savedTheme = getTheme();
-		if (savedTheme !== defaultPuckTheme) {
-			return savedTheme;
-		}
-		// Fall back to options theme or default
-		if (options.theme?.theme) {
-			return mergeThemes(defaultPuckTheme, options.theme.theme);
-		}
-		return defaultPuckTheme;
-	});
-
-export const PuckRenderer = ({
-	data,
-	options = {},
-}: PuckRendererProps): ReactElement => {
 	const config: Config = useMemo(
 		() => createPuckConfig(options) as unknown as Config,
 		[options]
