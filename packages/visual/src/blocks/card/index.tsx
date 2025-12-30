@@ -117,6 +117,9 @@ const CardInner: ComponentConfig<CardProps> = {
 		return (
 			<Section
 				backgroundColor={sectionBackgroundColor}
+				backgroundSize={sectionStyle?.backgroundSize}
+				backgroundRepeat={sectionStyle?.backgroundRepeat}
+				backgroundPosition={sectionStyle?.backgroundPosition}
 				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}

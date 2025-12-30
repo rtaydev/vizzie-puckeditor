@@ -1,22 +1,29 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { CustomFieldRender } from '@measured/puck';
 import { ChromePicker, type ColorResult } from 'react-color';
 import { spacingOptions } from '../config/options';
+import { ImageUploadField } from './ImageUploadField';
 
 type SectionStyleValue = {
 	backgroundColor?: string;
 	backgroundColorCustom?: string;
+	backgroundImage?: string;
+	backgroundSize?: 'cover' | 'contain' | 'auto' | 'initial';
+	backgroundRepeat?: 'repeat-x' | 'repeat-y' | 'no-repeat' | 'repeat';
+	backgroundPosition?: 'left' | 'center' | 'top' | 'right' | 'bottom';
 	paddingVertical?: string;
 	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 	maxWidth?: string;
 };
 
+const BACKGROUND_IMAGE_ALLOWED_FIELDS = ['flexblock', 'gridblock'];
+
 export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 	props
 ) => {
-	const { value = {}, onChange, field } = props;
+	const { value = {}, onChange, field, id } = props;
 	const [showColorPicker, setShowColorPicker] = useState(false);
 	const [hexValue, setHexValue] = useState(
 		value.backgroundColorCustom || '#000000'
@@ -97,6 +104,12 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 		}
 	};
 
+	const isBackgroundImageAllowed = useMemo(
+		() =>
+			BACKGROUND_IMAGE_ALLOWED_FIELDS.includes(id.split('-')[0].toLowerCase()),
+		[field]
+	);
+
 	const backgroundColor = value.backgroundColor || '';
 	const isCustomColor = backgroundColor === 'custom';
 
@@ -150,17 +163,17 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 								fontSize: '13px',
 							}}
 						>
-							<option value=''>None</option>
-							<option value='white'>White</option>
-							<option value='gray'>Gray</option>
-							<option value='gray-dark'>Gray Dark</option>
-							<option value='black'>Black</option>
-							<option value='custom'>Custom</option>
+							<option value="">None</option>
+							<option value="white">White</option>
+							<option value="gray">Gray</option>
+							<option value="gray-dark">Gray Dark</option>
+							<option value="black">Black</option>
+							<option value="custom">Custom</option>
 						</select>
 						{isCustomColor && (
 							<div style={{ position: 'relative' }}>
 								<button
-									type='button'
+									type="button"
 									onClick={() => setShowColorPicker(!showColorPicker)}
 									style={{
 										width: '36px',
@@ -176,7 +189,7 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 										position: 'relative',
 										overflow: 'hidden',
 									}}
-									title='Pick custom color'
+									title="Pick custom color"
 								>
 									<div
 										style={{
@@ -241,6 +254,146 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 					)}
 				</div>
 
+				{/* Background Image */}
+				{isBackgroundImageAllowed && (
+					<ImageUploadField
+						value={value.backgroundImage}
+						onChange={(url) => updateValue({ backgroundImage: url })}
+						field={'Background Image'}
+					/>
+				)}
+				{isBackgroundImageAllowed && (
+					<div>
+						<label
+							style={{
+								display: 'block',
+								marginBottom: '6px',
+								fontSize: '12px',
+								fontWeight: '500',
+								color: '#6b7280',
+							}}
+						>
+							Background Size
+						</label>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
+							}}
+						>
+							<select
+								value={value.backgroundSize || 'cover'}
+								onChange={(e) =>
+									updateValue({ backgroundSize: e.target.value })
+								}
+								style={{
+									width: '100%',
+									padding: '6px 8px',
+									border: '1px solid #d1d5db',
+									borderRadius: '6px',
+									fontSize: '13px',
+								}}
+							>
+								<option value="cover">Cover</option>
+								<option value="contain">Contain</option>
+								<option value="auto">Auto</option>
+								<option value="initial">Initial</option>
+							</select>
+						</div>
+					</div>
+				)}
+
+				{/* Background Repeat */}
+				{isBackgroundImageAllowed && (
+					<div>
+						<label
+							style={{
+								display: 'block',
+								marginBottom: '6px',
+								fontSize: '12px',
+								fontWeight: '500',
+								color: '#6b7280',
+							}}
+						>
+							Background Repeat
+						</label>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
+							}}
+						>
+							<select
+								value={value.backgroundRepeat || 'no-repeat'}
+								onChange={(e) =>
+									updateValue({ backgroundRepeat: e.target.value })
+								}
+								style={{
+									width: '100%',
+									padding: '6px 8px',
+									border: '1px solid #d1d5db',
+									borderRadius: '6px',
+									fontSize: '13px',
+								}}
+							>
+								<option value="repeat-x">Repeat X</option>
+								<option value="repeat-y">Repeat Y</option>
+								<option value="no-repeat">No Repeat</option>
+								<option value="repeat">Repeat</option>
+							</select>
+						</div>
+					</div>
+				)}
+
+				{/* Background Position */}
+				{isBackgroundImageAllowed && (
+					<div>
+						<label
+							style={{
+								display: 'block',
+								marginBottom: '6px',
+								fontSize: '12px',
+								fontWeight: '500',
+								color: '#6b7280',
+							}}
+						>
+							Background Position
+						</label>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
+							}}
+						>
+							<select
+								value={value.backgroundPosition || 'center'}
+								onChange={(e) =>
+									updateValue({ backgroundPosition: e.target.value })
+								}
+								style={{
+									width: '100%',
+									padding: '6px 8px',
+									border: '1px solid #d1d5db',
+									borderRadius: '6px',
+									fontSize: '13px',
+								}}
+							>
+								<option value="left">Left</option>
+								<option value="center">Center</option>
+								<option value="right">Right</option>
+								<option value="top">Top</option>
+								<option value="bottom">Bottom</option>
+							</select>
+						</div>
+					</div>
+				)}
+
 				{/* Padding Top & Bottom */}
 				<div
 					style={{
@@ -271,10 +424,10 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 							}}
 						>
 							<input
-								type='range'
-								min='0'
+								type="range"
+								min="0"
 								max={spacingOptions.length}
-								step='1'
+								step="1"
 								value={(() => {
 									const currentValue = value.paddingVertical || '0px';
 									if (currentValue === '0px') return 0;
@@ -348,11 +501,11 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 							fontSize: '13px',
 						}}
 					>
-						<option value='stretch'>Stretch</option>
-						<option value='flex-start'>Start</option>
-						<option value='center'>Center</option>
-						<option value='flex-end'>End</option>
-						<option value='baseline'>Baseline</option>
+						<option value="stretch">Stretch</option>
+						<option value="flex-start">Start</option>
+						<option value="center">Center</option>
+						<option value="flex-end">End</option>
+						<option value="baseline">Baseline</option>
 					</select>
 				</div>
 
@@ -370,10 +523,10 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 						Max Width
 					</label>
 					<input
-						type='text'
+						type="text"
 						value={value.maxWidth || ''}
 						onChange={(e) => updateValue({ maxWidth: e.target.value })}
-						placeholder='e.g., 1280px, 100%'
+						placeholder="e.g., 1280px, 100%"
 						style={{
 							width: '100%',
 							padding: '6px 8px',

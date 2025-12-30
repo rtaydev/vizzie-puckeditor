@@ -7,5 +7,6 @@
 		"build": "pnpm -r build",
 		"lint": "pnpm -r lint",
 		"typecheck": "pnpm -r typecheck"
-	}
+	},
+	"version": "0.0.1"
 }
