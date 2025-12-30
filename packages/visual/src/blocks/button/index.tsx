@@ -163,7 +163,7 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 
 		const buttonElement = (
 			<button
-				type='button'
+				type="button"
 				style={{
 					...currentSizeStyles,
 					...variantStyles,
