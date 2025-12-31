@@ -188,7 +188,7 @@ const VideoInner: ComponentConfig<VideoProps> = {
 								height: '100%',
 								border: 'none',
 							}}
-							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
 						/>
 					</div>
@@ -228,7 +228,7 @@ const VideoInner: ComponentConfig<VideoProps> = {
 								height: '100%',
 								border: 'none',
 							}}
-							allow='autoplay; fullscreen; picture-in-picture'
+							allow="autoplay; fullscreen; picture-in-picture"
 							allowFullScreen
 						/>
 					</div>
@@ -285,6 +285,7 @@ const VideoInner: ComponentConfig<VideoProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
+				paddingHorizontal={sectionStyle?.paddingHorizontal || '0rem'}
 				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}

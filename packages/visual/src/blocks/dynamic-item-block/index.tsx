@@ -218,6 +218,7 @@ const DynamicItemInner: ComponentConfig<DynamicItemProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
+				paddingHorizontal={sectionStyle?.paddingHorizontal}
 				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}

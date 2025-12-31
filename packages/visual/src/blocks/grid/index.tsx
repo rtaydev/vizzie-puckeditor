@@ -81,6 +81,7 @@ export const GridBlock: ComponentConfig<GridProps> = {
 				backgroundSize={sectionStyle?.backgroundSize}
 				backgroundRepeat={sectionStyle?.backgroundRepeat}
 				backgroundPosition={sectionStyle?.backgroundPosition}
+				paddingHorizontal={sectionStyle?.paddingHorizontal}
 				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}

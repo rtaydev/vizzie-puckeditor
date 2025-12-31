@@ -19,7 +19,7 @@ export const RemSliderField: CustomFieldRender<number> = (props) => {
 		if (val === 's') return 1; // ~16px
 		if (val === 'm') return 1.25; // ~20px
 		// Default fallback
-		return 1.25;
+		return 1;
 	};
 
 	const numericValue = normalizeValue(value ?? 1.25);
@@ -65,7 +65,7 @@ export const RemSliderField: CustomFieldRender<number> = (props) => {
 				style={{ display: 'flex', gap: '12px', alignItems: 'center', flex: 1 }}
 			>
 				<input
-					type='range'
+					type="range"
 					min={min}
 					max={max}
 					step={step}

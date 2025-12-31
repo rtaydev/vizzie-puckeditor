@@ -20,6 +20,7 @@ export type SectionProps = {
 	backgroundSize?: 'cover' | 'contain' | 'auto' | 'initial';
 	backgroundRepeat?: 'repeat-x' | 'repeat-y' | 'no-repeat' | 'repeat';
 	backgroundPosition?: 'left' | 'center' | 'top' | 'right' | 'bottom';
+	paddingHorizontal?: string;
 	paddingVertical?: string;
 	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 };
@@ -36,6 +37,7 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
 			backgroundSize,
 			backgroundRepeat,
 			backgroundPosition,
+			paddingHorizontal,
 			paddingVertical,
 			alignItems,
 		},
@@ -66,6 +68,7 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(
 		const sectionStyle: CSSProperties = {
 			...style,
 			...(shouldUseInlineBackground && { backgroundColor }),
+			...(paddingHorizontal && { paddingInline: paddingHorizontal }),
 			...(paddingVertical && { paddingBlock: paddingVertical }),
 		};
 

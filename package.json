@@ -8,5 +8,5 @@
 		"lint": "pnpm -r lint",
 		"typecheck": "pnpm -r typecheck"
 	},
-	"version": "0.0.1"
+	"version": "0.1.0"
 }
