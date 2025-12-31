@@ -159,6 +159,7 @@ const PricingOneInner: ComponentConfig<PricingOneProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
+				paddingHorizontal={sectionStyle?.paddingHorizontal || '0rem'}
 				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth || '100%'}

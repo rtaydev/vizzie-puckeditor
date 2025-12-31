@@ -80,6 +80,11 @@ const HeadingInternal: ComponentConfig<HeadingProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
+				backgroundImage={sectionStyle?.backgroundImage}
+				backgroundSize={sectionStyle?.backgroundSize}
+				backgroundRepeat={sectionStyle?.backgroundRepeat}
+				backgroundPosition={sectionStyle?.backgroundPosition}
+				paddingHorizontal={sectionStyle?.paddingHorizontal}
 				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}

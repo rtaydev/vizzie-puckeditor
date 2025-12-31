@@ -1,22 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { CustomFieldRender } from '@measured/puck';
 import { ChromePicker, type ColorResult } from 'react-color';
 import { spacingOptions } from '../config/options';
+import { ImageUploadField } from './ImageUploadField';
 
 type SectionStyleValue = {
 	backgroundColor?: string;
 	backgroundColorCustom?: string;
+	backgroundImage?: string;
+	backgroundSize?: 'cover' | 'contain' | 'auto' | 'initial';
+	backgroundRepeat?: 'repeat-x' | 'repeat-y' | 'no-repeat' | 'repeat';
+	backgroundPosition?: 'left' | 'center' | 'top' | 'right' | 'bottom';
+	paddingHorizontal?: string;
 	paddingVertical?: string;
 	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 	maxWidth?: string;
 };
 
+const BACKGROUND_IMAGE_ALLOWED_FIELDS = ['flexblock', 'gridblock'];
+
 export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 	props
 ) => {
-	const { value = {}, onChange, field } = props;
+	const { value = {}, onChange, field, id } = props;
 	const [showColorPicker, setShowColorPicker] = useState(false);
 	const [hexValue, setHexValue] = useState(
 		value.backgroundColorCustom || '#000000'
@@ -96,6 +104,12 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 			updateValue({ backgroundColorCustom: hex, backgroundColor: 'custom' });
 		}
 	};
+
+	const isBackgroundImageAllowed = useMemo(
+		() =>
+			BACKGROUND_IMAGE_ALLOWED_FIELDS.includes(id.split('-')[0].toLowerCase()),
+		[field]
+	);
 
 	const backgroundColor = value.backgroundColor || '';
 	const isCustomColor = backgroundColor === 'custom';
@@ -241,6 +255,146 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 					)}
 				</div>
 
+				{/* Background Image */}
+				{isBackgroundImageAllowed && (
+					<ImageUploadField
+						value={value.backgroundImage}
+						onChange={(url) => updateValue({ backgroundImage: url })}
+						field={'Background Image'}
+					/>
+				)}
+				{isBackgroundImageAllowed && (
+					<div>
+						<label
+							style={{
+								display: 'block',
+								marginBottom: '6px',
+								fontSize: '12px',
+								fontWeight: '500',
+								color: '#6b7280',
+							}}
+						>
+							Background Size
+						</label>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
+							}}
+						>
+							<select
+								value={value.backgroundSize || 'cover'}
+								onChange={(e) =>
+									updateValue({ backgroundSize: e.target.value })
+								}
+								style={{
+									width: '100%',
+									padding: '6px 8px',
+									border: '1px solid #d1d5db',
+									borderRadius: '6px',
+									fontSize: '13px',
+								}}
+							>
+								<option value='cover'>Cover</option>
+								<option value='contain'>Contain</option>
+								<option value='auto'>Auto</option>
+								<option value='initial'>Initial</option>
+							</select>
+						</div>
+					</div>
+				)}
+
+				{/* Background Repeat */}
+				{isBackgroundImageAllowed && (
+					<div>
+						<label
+							style={{
+								display: 'block',
+								marginBottom: '6px',
+								fontSize: '12px',
+								fontWeight: '500',
+								color: '#6b7280',
+							}}
+						>
+							Background Repeat
+						</label>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
+							}}
+						>
+							<select
+								value={value.backgroundRepeat || 'no-repeat'}
+								onChange={(e) =>
+									updateValue({ backgroundRepeat: e.target.value })
+								}
+								style={{
+									width: '100%',
+									padding: '6px 8px',
+									border: '1px solid #d1d5db',
+									borderRadius: '6px',
+									fontSize: '13px',
+								}}
+							>
+								<option value='repeat-x'>Repeat X</option>
+								<option value='repeat-y'>Repeat Y</option>
+								<option value='no-repeat'>No Repeat</option>
+								<option value='repeat'>Repeat</option>
+							</select>
+						</div>
+					</div>
+				)}
+
+				{/* Background Position */}
+				{isBackgroundImageAllowed && (
+					<div>
+						<label
+							style={{
+								display: 'block',
+								marginBottom: '6px',
+								fontSize: '12px',
+								fontWeight: '500',
+								color: '#6b7280',
+							}}
+						>
+							Background Position
+						</label>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
+							}}
+						>
+							<select
+								value={value.backgroundPosition || 'center'}
+								onChange={(e) =>
+									updateValue({ backgroundPosition: e.target.value })
+								}
+								style={{
+									width: '100%',
+									padding: '6px 8px',
+									border: '1px solid #d1d5db',
+									borderRadius: '6px',
+									fontSize: '13px',
+								}}
+							>
+								<option value='left'>Left</option>
+								<option value='center'>Center</option>
+								<option value='right'>Right</option>
+								<option value='top'>Top</option>
+								<option value='bottom'>Bottom</option>
+							</select>
+						</div>
+					</div>
+				)}
+
 				{/* Padding Top & Bottom */}
 				<div
 					style={{
@@ -249,7 +403,79 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 						gap: '12px',
 					}}
 				>
-					{/* Padding Y */}
+					{/* Padding */}
+					<div>
+						<label
+							style={{
+								display: 'block',
+								marginBottom: '6px',
+								fontSize: '12px',
+								fontWeight: '500',
+								color: '#6b7280',
+							}}
+						>
+							Horizontal Padding
+						</label>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
+							}}
+						>
+							<input
+								type='range'
+								min='0'
+								max={spacingOptions.length}
+								step='1'
+								value={(() => {
+									const currentValue = value.paddingHorizontal || '0px';
+									if (currentValue === '0px') return 0;
+									const index = spacingOptions.findIndex(
+										(opt) => opt.value === currentValue
+									);
+									return index >= 0 ? index + 1 : 0;
+								})()}
+								onChange={(e) => {
+									const sliderValue = parseInt(e.target.value);
+									if (sliderValue === 0) {
+										updateValue({ paddingHorizontal: '0px' });
+									} else {
+										updateValue({
+											paddingHorizontal: spacingOptions[sliderValue - 1].value,
+										});
+									}
+								}}
+								style={{
+									flex: 1,
+									height: '6px',
+									borderRadius: '3px',
+									background: '#e5e7eb',
+									outline: 'none',
+									cursor: 'pointer',
+								}}
+							/>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									fontSize: '12px',
+									color: '#6b7280',
+								}}
+							>
+								<span
+									style={{
+										fontWeight: '600',
+										color: '#111827',
+									}}
+								>
+									{value.paddingHorizontal || '0px'}
+								</span>
+							</div>
+						</div>
+					</div>
 					<div>
 						<label
 							style={{

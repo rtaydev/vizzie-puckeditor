@@ -1,6 +1,6 @@
 {
 	"name": "@puck-editor/visual",
-	"version": "0.1.5",
+	"version": "0.2.0",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -19,7 +19,7 @@
 		"puck",
 		"visual",
 		"editor",
-		"next.js"
+		"nextjs"
 	],
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",

@@ -23,7 +23,7 @@ export type TextProps = WithLayout<
 const TextInner: ComponentConfig<TextProps> = {
 	fields: {
 		text: {
-			type: 'text',
+			type: 'textarea',
 			contentEditable: true,
 		},
 		size: {
@@ -68,6 +68,7 @@ const TextInner: ComponentConfig<TextProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
+				paddingHorizontal={sectionStyle?.paddingHorizontal}
 				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth || maxWidth}

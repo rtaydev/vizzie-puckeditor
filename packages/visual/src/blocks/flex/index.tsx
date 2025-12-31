@@ -83,8 +83,12 @@ const FlexInternal: ComponentConfig<FlexProps> = {
 
 		return (
 			<Section
-				style={{ height: '100%' }}
 				backgroundColor={backgroundColor}
+				backgroundImage={sectionStyle?.backgroundImage}
+				backgroundSize={sectionStyle?.backgroundSize}
+				backgroundRepeat={sectionStyle?.backgroundRepeat}
+				backgroundPosition={sectionStyle?.backgroundPosition}
+				paddingHorizontal={sectionStyle?.paddingHorizontal}
 				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}

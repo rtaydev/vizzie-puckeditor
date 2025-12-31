@@ -4,49 +4,15 @@ import { useState, useRef, useEffect } from 'react';
 import type { CustomFieldRender } from '@measured/puck';
 import { Upload } from 'lucide-react';
 
-const MAX_BYTES = 10 * 1024 * 1024; // 10MB
-
-// IMPORTANT: we intentionally do NOT allow SVG via data: to reduce XSS risk.
-// If you need SVG, treat it as untrusted content and serve it with correct headers from your own backend.
-const SAFE_DATA_IMAGE_PREFIXES = [
-	'data:image/png;base64,',
-	'data:image/jpeg;base64,',
-	'data:image/jpg;base64,',
-	'data:image/gif;base64,',
-	'data:image/webp;base64,',
-	'data:image/bmp;base64,',
-	'data:image/avif;base64,',
-] as const;
-
-function sanitizeImageSrc(input: string | undefined | null): string | null {
-	if (!input) return null;
-
-	const trimmed = input.trim();
-	if (!trimmed) return null;
-
-	// Allow safe data URLs (base64 only) for a strict set of image mime types (NO SVG).
-	const lower = trimmed.toLowerCase();
-	if (SAFE_DATA_IMAGE_PREFIXES.some((p) => lower.startsWith(p))) return trimmed;
-
-	// Allow blob: created via URL.createObjectURL
-	if (lower.startsWith('blob:')) return trimmed;
-
-	// For normal URLs, require http(s) and a valid absolute URL.
-	// This also blocks javascript:, file:, vbscript:, etc.
-	try {
-		const url = new URL(trimmed);
-		if (url.protocol === 'http:' || url.protocol === 'https:') return url.toString();
-		return null;
-	} catch {
-		return null;
-	}
-}
-
-export const ImageUploadField: CustomFieldRender<string | undefined> = (props) => {
+export const ImageUploadField: CustomFieldRender<string | undefined> = (
+	props
+) => {
 	const { value, onChange, field } = props;
 
 	const [uploading, setUploading] = useState(false);
-	const [preview, setPreview] = useState<string | null>(() => sanitizeImageSrc(value) ?? null);
+	const [preview, setPreview] = useState<string | null>(
+		() => sanitizeImageSrc(value) ?? null
+	);
 
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -65,17 +31,9 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 		setPreview(next);
 	}, [value]);
 
-	useEffect(() => {
-		// Cleanup on unmount
-		return () => {
-			if (lastBlobPreviewRef.current) {
-				URL.revokeObjectURL(lastBlobPreviewRef.current);
-				lastBlobPreviewRef.current = null;
-			}
-		};
-	}, []);
-
-	const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleFileSelect = async (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		const file = event.target.files?.[0];
 		if (!file) return;
 
@@ -118,7 +76,12 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 
 				// Extra guard: only persist safe base64 data URLs (no SVG)
 				const safe = sanitizeImageSrc(base64String);
-				if (!safe || !SAFE_DATA_IMAGE_PREFIXES.some((p) => base64String.toLowerCase().startsWith(p))) {
+				if (
+					!safe ||
+					!SAFE_DATA_IMAGE_PREFIXES.some((p) =>
+						base64String.toLowerCase().startsWith(p)
+					)
+				) {
 					alert('Unsupported image format');
 					setUploading(false);
 					return;
@@ -182,10 +145,10 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 				>
 					<img
 						src={preview}
-						alt="Preview"
+						alt='Preview'
 						// defense-in-depth: avoid sending referrer to arbitrary user URLs
-						referrerPolicy="no-referrer"
-						loading="lazy"
+						referrerPolicy='no-referrer'
+						loading='lazy'
 						style={{
 							width: '100%',
 							height: 'auto',
@@ -197,7 +160,7 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 						}}
 					/>
 					<button
-						type="button"
+						type='button'
 						onClick={handleRemove}
 						style={{
 							position: 'absolute',
@@ -248,15 +211,15 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 
 			<input
 				ref={fileInputRef}
-				type="file"
-				accept="image/*"
+				type='file'
+				accept='image/*'
 				onChange={handleFileSelect}
 				style={{ display: 'none' }}
 				disabled={uploading}
 			/>
 
 			<input
-				type="text"
+				type='text'
 				value={value || ''}
 				onChange={(e) => {
 					const raw = e.target.value;
@@ -265,7 +228,7 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (props) =
 					// Persist only safe URLs/data URLs; otherwise store empty (or keep raw if you prefer).
 					onChange(safe ?? '');
 				}}
-				placeholder="Or enter image URL (http/https only)"
+				placeholder='Or enter image URL (http/https only)'
 				style={{
 					width: '100%',
 					padding: '8px 12px',
