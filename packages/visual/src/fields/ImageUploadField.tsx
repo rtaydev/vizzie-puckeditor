@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import type { CustomFieldRender } from '@measured/puck';
 import { Upload } from 'lucide-react';
+import { sanitizeImageSrc, MAX_BYTES, SAFE_DATA_IMAGE_PREFIXES } from '../utils';
 
 export const ImageUploadField: CustomFieldRender<string | undefined> = (
 	props
