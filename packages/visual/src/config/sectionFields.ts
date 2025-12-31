@@ -8,6 +8,7 @@ export type SectionStyleValue = {
 	backgroundSize?: 'cover' | 'contain' | 'auto' | 'initial';
 	backgroundRepeat?: 'repeat-x' | 'repeat-y' | 'no-repeat' | 'repeat';
 	backgroundPosition?: 'left' | 'center' | 'top' | 'right' | 'bottom';
+	paddingHorizontal?: string;
 	paddingVertical?: string;
 	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 	maxWidth?: string;

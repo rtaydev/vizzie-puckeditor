@@ -39,9 +39,7 @@ const SpacerInner: ComponentConfig<SpacerProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
-				backgroundSize={sectionStyle?.backgroundSize}
-				backgroundRepeat={sectionStyle?.backgroundRepeat}
-				backgroundPosition={sectionStyle?.backgroundPosition}
+				paddingHorizontal={sectionStyle?.paddingHorizontal || '0rem'}
 				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}

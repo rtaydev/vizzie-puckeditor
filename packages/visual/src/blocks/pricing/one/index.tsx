@@ -159,6 +159,7 @@ const PricingOneInner: ComponentConfig<PricingOneProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
+				paddingHorizontal={sectionStyle?.paddingHorizontal || '0rem'}
 				paddingVertical={sectionStyle?.paddingVertical || '0rem'}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth || '100%'}
@@ -170,8 +171,8 @@ const PricingOneInner: ComponentConfig<PricingOneProps> = {
 						<div className={styles.toggle}>
 							<span>Monthly</span>
 							<button
-								type='button'
-								role='switch'
+								type="button"
+								role="switch"
 								aria-checked={isYearly}
 								onClick={() => setIsYearly(!isYearly)}
 								className={styles.switch}

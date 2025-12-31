@@ -19,7 +19,7 @@
 		"puck",
 		"visual",
 		"editor",
-		"next.js"
+		"nextjs"
 	],
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",

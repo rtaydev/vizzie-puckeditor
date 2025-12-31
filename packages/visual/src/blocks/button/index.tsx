@@ -16,7 +16,7 @@ export type ButtonProps = WithLayout<
 		link?: string;
 		variant: 'primary' | 'secondary' | 'outline' | 'ghost';
 		size: 'small' | 'medium' | 'large';
-		color: string;
+		color: string | undefined;
 		align: 'left' | 'center' | 'right';
 		fullWidth: boolean;
 		fontSize: number;
@@ -58,7 +58,7 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 			type: 'custom',
 			label: 'Font Size',
 			render: (props) => <RemSliderField {...props} />,
-			min: 0.75,
+			min: 0.7,
 			max: 2,
 			step: 0.1,
 		} as CustomField<number>,
@@ -93,7 +93,6 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 		link: '',
 		variant: 'primary',
 		size: 'medium',
-		color: 'var(--puck-color-button-primary)',
 		align: 'center',
 		fullWidth: false,
 		fontSize: 1,
@@ -116,9 +115,9 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 
 		// Size styles
 		const sizeStyles = {
-			small: { fontSize: `${fontSize * 0.875}rem` },
-			medium: { fontSize: `${fontSize}rem` },
-			large: { fontSize: `${fontSize * 1.125}rem` },
+			small: { padding: '0.5rem 1rem' },
+			medium: { padding: '0.8rem 1.8rem' },
+			large: { padding: '1rem 2.5rem' },
 		};
 
 		// Variant styles
@@ -128,38 +127,39 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 				case 'primary':
 					return {
 						background: baseColor,
-						color: '#ffffff',
-						border: `2px solid ${baseColor}`,
+						color: 'var(--puck-color-background)',
+						border: 'none',
 					};
 				case 'secondary':
 					return {
-						background: 'transparent',
-						color: baseColor,
-						border: `2px solid ${baseColor}`,
+						background: color || 'var(--puck-color-button-secondary)',
+						color: 'var(--puck-color-foreground)',
+						border: 'none',
 					};
 				case 'outline':
 					return {
 						background: 'transparent',
 						color: baseColor,
-						border: `2px solid ${baseColor}`,
+						border: `1px solid ${baseColor}`,
 					};
 				case 'ghost':
 					return {
 						background: 'transparent',
 						color: baseColor,
-						border: '2px solid transparent',
+						border: 'none',
 					};
 				default:
 					return {
 						background: baseColor,
 						color: '#ffffff',
-						border: `2px solid ${baseColor}`,
+						border: `1px solid ${baseColor}`,
 					};
 			}
 		};
 
 		const variantStyles = getVariantStyles();
 		const currentSizeStyles = sizeStyles[size];
+		const fontSizeStyle = { fontSize: `${fontSize || 1}rem` };
 
 		const buttonElement = (
 			<button
@@ -167,6 +167,8 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 				style={{
 					...currentSizeStyles,
 					...variantStyles,
+					...fontSizeStyle,
+					width: fullWidth ? '100%' : 'auto',
 				}}
 				className={styles.button}
 				onMouseEnter={(e) => {
@@ -187,6 +189,7 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 		return (
 			<Section
 				backgroundColor={backgroundColor}
+				paddingHorizontal={sectionStyle?.paddingHorizontal}
 				paddingVertical={sectionStyle?.paddingVertical}
 				alignItems={sectionStyle?.alignItems}
 				maxWidth={sectionStyle?.maxWidth}
@@ -204,7 +207,7 @@ const ButtonInner: ComponentConfig<ButtonProps> = {
 					}}
 				>
 					{link ? (
-						<a href={link} className={styles.button}>
+						<a href={link} style={{ width: fullWidth ? '100%' : 'auto' }}>
 							{buttonElement}
 						</a>
 					) : (

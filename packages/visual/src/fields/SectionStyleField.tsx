@@ -13,6 +13,7 @@ type SectionStyleValue = {
 	backgroundSize?: 'cover' | 'contain' | 'auto' | 'initial';
 	backgroundRepeat?: 'repeat-x' | 'repeat-y' | 'no-repeat' | 'repeat';
 	backgroundPosition?: 'left' | 'center' | 'top' | 'right' | 'bottom';
+	paddingHorizontal?: string;
 	paddingVertical?: string;
 	alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
 	maxWidth?: string;
@@ -402,7 +403,79 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 						gap: '12px',
 					}}
 				>
-					{/* Padding Y */}
+					{/* Padding */}
+					<div>
+						<label
+							style={{
+								display: 'block',
+								marginBottom: '6px',
+								fontSize: '12px',
+								fontWeight: '500',
+								color: '#6b7280',
+							}}
+						>
+							Horizontal Padding
+						</label>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								gap: '8px',
+								alignItems: 'center',
+							}}
+						>
+							<input
+								type="range"
+								min="0"
+								max={spacingOptions.length}
+								step="1"
+								value={(() => {
+									const currentValue = value.paddingHorizontal || '0px';
+									if (currentValue === '0px') return 0;
+									const index = spacingOptions.findIndex(
+										(opt) => opt.value === currentValue
+									);
+									return index >= 0 ? index + 1 : 0;
+								})()}
+								onChange={(e) => {
+									const sliderValue = parseInt(e.target.value);
+									if (sliderValue === 0) {
+										updateValue({ paddingHorizontal: '0px' });
+									} else {
+										updateValue({
+											paddingHorizontal: spacingOptions[sliderValue - 1].value,
+										});
+									}
+								}}
+								style={{
+									flex: 1,
+									height: '6px',
+									borderRadius: '3px',
+									background: '#e5e7eb',
+									outline: 'none',
+									cursor: 'pointer',
+								}}
+							/>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'space-between',
+									alignItems: 'center',
+									fontSize: '12px',
+									color: '#6b7280',
+								}}
+							>
+								<span
+									style={{
+										fontWeight: '600',
+										color: '#111827',
+									}}
+								>
+									{value.paddingHorizontal || '0px'}
+								</span>
+							</div>
+						</div>
+					</div>
 					<div>
 						<label
 							style={{
