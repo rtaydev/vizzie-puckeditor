@@ -10,11 +10,7 @@ importers:
 
   apps/example:
     dependencies:
-<<<<<<< HEAD
       '@rtaydev/vizzie-editor':
-=======
-      '@vizzie/editor':
->>>>>>> a44d127803ed15466313166c8acc5b58d6e6566b
         specifier: workspace:*
         version: link:../../packages/visual
       next:
