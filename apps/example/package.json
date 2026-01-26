@@ -9,7 +9,7 @@
 		"lint": "eslint"
 	},
 	"dependencies": {
-		"@puck-editor/visual": "workspace:*",
+		"@vizzie/editor": "workspace:*",
 		"next": "16.1.1",
 		"react": "19.2.3",
 		"react-dom": "19.2.3"

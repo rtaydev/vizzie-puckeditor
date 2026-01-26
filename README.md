@@ -20,21 +20,23 @@ Puck Editor is a visual page builder that gives you:
 
 This is a monorepo containing:
 
-### [@puck-editor/visual](./packages/visual)
+### [@vizzie/editor](./packages/visual)
+
+> ⚠️ **Package Name Change**: This package has been renamed from `@puck-editor/visual` to `@vizzie/editor`. The old package is deprecated. Please see the [migration guide](./packages/visual/README.md#migration-from-puck-editorvisual) for details.
 
 The main visual editor component library. A React component for Next.js that provides a complete page builder experience.
 
 **Install:**
 
 ```bash
-npm install @puck-editor/visual @measured/puck react react-dom
+npm install @vizzie/editor @measured/puck react react-dom
 ```
 
 **Quick Start:**
 
 ```tsx
-import { PuckEditor } from '@puck-editor/visual';
-import '@puck-editor/visual/styles.css';
+import { PuckEditor } from '@vizzie/editor';
+import '@vizzie/editor/styles.css';
 
 export default function Editor() {
 	return (
