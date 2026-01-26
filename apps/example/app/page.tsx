@@ -5,7 +5,7 @@ import {
 	defaultPuckTheme,
 	mergeThemes,
 	type PuckTheme,
-} from '@puck-editor/visual';
+} from '@rtaydev/vizzie-editor';
 import { useState, useEffect, useMemo } from 'react';
 
 export const dynamic = 'force-dynamic';

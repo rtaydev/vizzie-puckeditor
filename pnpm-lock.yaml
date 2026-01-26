@@ -10,7 +10,7 @@ importers:
 
   apps/example:
     dependencies:
-      '@puck-editor/visual':
+      '@rtaydev/vizzie-editor':
         specifier: workspace:*
         version: link:../../packages/visual
       next:
