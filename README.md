@@ -4,6 +4,8 @@ A modern, customizable visual editor for building web pages. Built on [@measured
 
 [![bhpaQ.gif](https://s12.gifyu.com/images/bhpaQ.gif)](https://gifyu.com/image/bhpaQ)
 
+**Live Demo:** [Try it out →](https://vizzie-puckeditor-example-963qv3jeq-rtayprods-projects.vercel.app/)
+
 ## What is Puck Editor?
 
 Puck Editor is a visual page builder that gives you:
