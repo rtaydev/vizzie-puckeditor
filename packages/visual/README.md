@@ -55,6 +55,8 @@ The API and functionality remain exactly the same - only the package name has ch
 
 [![bhpaQ.gif](https://s12.gifyu.com/images/bhpaQ.gif)](https://gifyu.com/image/bhpaQ)
 
+**Live Demo:** [Try it out →](https://vizzie-puckeditor-example-963qv3jeq-rtayprods-projects.vercel.app/)
+
 ## Installation
 
 ```bash
