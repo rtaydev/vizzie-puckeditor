@@ -171,8 +171,8 @@ const PricingOneInner: ComponentConfig<PricingOneProps> = {
 						<div className={styles.toggle}>
 							<span>Monthly</span>
 							<button
-								type="button"
-								role="switch"
+								type='button'
+								role='switch'
 								aria-checked={isYearly}
 								onClick={() => setIsYearly(!isYearly)}
 								className={styles.switch}

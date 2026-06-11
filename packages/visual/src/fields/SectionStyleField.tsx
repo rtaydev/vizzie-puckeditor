@@ -164,17 +164,17 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 								fontSize: '13px',
 							}}
 						>
-							<option value="">None</option>
-							<option value="white">White</option>
-							<option value="gray">Gray</option>
-							<option value="gray-dark">Gray Dark</option>
-							<option value="black">Black</option>
-							<option value="custom">Custom</option>
+							<option value=''>None</option>
+							<option value='white'>White</option>
+							<option value='gray'>Gray</option>
+							<option value='gray-dark'>Gray Dark</option>
+							<option value='black'>Black</option>
+							<option value='custom'>Custom</option>
 						</select>
 						{isCustomColor && (
 							<div style={{ position: 'relative' }}>
 								<button
-									type="button"
+									type='button'
 									onClick={() => setShowColorPicker(!showColorPicker)}
 									style={{
 										width: '36px',
@@ -190,7 +190,7 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 										position: 'relative',
 										overflow: 'hidden',
 									}}
-									title="Pick custom color"
+									title='Pick custom color'
 								>
 									<div
 										style={{
@@ -297,10 +297,10 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 									fontSize: '13px',
 								}}
 							>
-								<option value="cover">Cover</option>
-								<option value="contain">Contain</option>
-								<option value="auto">Auto</option>
-								<option value="initial">Initial</option>
+								<option value='cover'>Cover</option>
+								<option value='contain'>Contain</option>
+								<option value='auto'>Auto</option>
+								<option value='initial'>Initial</option>
 							</select>
 						</div>
 					</div>
@@ -341,10 +341,10 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 									fontSize: '13px',
 								}}
 							>
-								<option value="repeat-x">Repeat X</option>
-								<option value="repeat-y">Repeat Y</option>
-								<option value="no-repeat">No Repeat</option>
-								<option value="repeat">Repeat</option>
+								<option value='repeat-x'>Repeat X</option>
+								<option value='repeat-y'>Repeat Y</option>
+								<option value='no-repeat'>No Repeat</option>
+								<option value='repeat'>Repeat</option>
 							</select>
 						</div>
 					</div>
@@ -385,11 +385,11 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 									fontSize: '13px',
 								}}
 							>
-								<option value="left">Left</option>
-								<option value="center">Center</option>
-								<option value="right">Right</option>
-								<option value="top">Top</option>
-								<option value="bottom">Bottom</option>
+								<option value='left'>Left</option>
+								<option value='center'>Center</option>
+								<option value='right'>Right</option>
+								<option value='top'>Top</option>
+								<option value='bottom'>Bottom</option>
 							</select>
 						</div>
 					</div>
@@ -425,10 +425,10 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 							}}
 						>
 							<input
-								type="range"
-								min="0"
+								type='range'
+								min='0'
 								max={spacingOptions.length}
-								step="1"
+								step='1'
 								value={(() => {
 									const currentValue = value.paddingHorizontal || '0px';
 									if (currentValue === '0px') return 0;
@@ -497,10 +497,10 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 							}}
 						>
 							<input
-								type="range"
-								min="0"
+								type='range'
+								min='0'
 								max={spacingOptions.length}
-								step="1"
+								step='1'
 								value={(() => {
 									const currentValue = value.paddingVertical || '0px';
 									if (currentValue === '0px') return 0;
@@ -574,11 +574,11 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 							fontSize: '13px',
 						}}
 					>
-						<option value="stretch">Stretch</option>
-						<option value="flex-start">Start</option>
-						<option value="center">Center</option>
-						<option value="flex-end">End</option>
-						<option value="baseline">Baseline</option>
+						<option value='stretch'>Stretch</option>
+						<option value='flex-start'>Start</option>
+						<option value='center'>Center</option>
+						<option value='flex-end'>End</option>
+						<option value='baseline'>Baseline</option>
 					</select>
 				</div>
 
@@ -596,10 +596,10 @@ export const SectionStyleField: CustomFieldRender<SectionStyleValue> = (
 						Max Width
 					</label>
 					<input
-						type="text"
+						type='text'
 						value={value.maxWidth || ''}
 						onChange={(e) => updateValue({ maxWidth: e.target.value })}
-						placeholder="e.g., 1280px, 100%"
+						placeholder='e.g., 1280px, 100%'
 						style={{
 							width: '100%',
 							padding: '6px 8px',

@@ -9,12 +9,27 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (
 	props
 ) => {
 	const { value, onChange, field } = props;
+
 	const [uploading, setUploading] = useState(false);
-	const [preview, setPreview] = useState<string | null>(value || null);
+	const [preview, setPreview] = useState<string | null>(
+		() => sanitizeImageSrc(value) ?? null
+	);
+
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
+	// Track blob preview so we can revoke it and avoid leaks.
+	const lastBlobPreviewRef = useRef<string | null>(null);
+
 	useEffect(() => {
-		setPreview(value || null);
+		const next = sanitizeImageSrc(value) ?? null;
+
+		// If we previously created a blob preview and we're moving away from it, revoke it.
+		if (lastBlobPreviewRef.current && lastBlobPreviewRef.current !== next) {
+			URL.revokeObjectURL(lastBlobPreviewRef.current);
+			lastBlobPreviewRef.current = null;
+		}
+
+		setPreview(next);
 	}, [value]);
 
 	const handleFileSelect = async (
@@ -23,30 +38,65 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (
 		const file = event.target.files?.[0];
 		if (!file) return;
 
-		// Validate file type
-		if (!file.type.startsWith('image/')) {
+		// Validate file type (block SVG specifically)
+		const type = (file.type || '').toLowerCase();
+		if (!type.startsWith('image/')) {
 			alert('Please select an image file');
+			return;
+		}
+		if (type === 'image/svg+xml') {
+			alert('SVG uploads are not allowed for security reasons');
+			return;
+		}
+
+		// Validate size
+		if (file.size > MAX_BYTES) {
+			alert('Image must be 10MB or less');
 			return;
 		}
 
 		setUploading(true);
 
 		try {
-			// Create a preview URL
+			// Create a preview URL (blob:)
 			const previewUrl = URL.createObjectURL(file);
+
+			// Revoke previous blob preview if any
+			if (lastBlobPreviewRef.current) {
+				URL.revokeObjectURL(lastBlobPreviewRef.current);
+			}
+			lastBlobPreviewRef.current = previewUrl;
+
 			setPreview(previewUrl);
 
 			// Convert to base64 for storage (or upload to your server)
 			const reader = new FileReader();
+
 			reader.onloadend = () => {
-				const base64String = reader.result as string;
+				const base64String = String(reader.result || '');
+
+				// Extra guard: only persist safe base64 data URLs (no SVG)
+				const safe = sanitizeImageSrc(base64String);
+				if (
+					!safe ||
+					!SAFE_DATA_IMAGE_PREFIXES.some((p) =>
+						base64String.toLowerCase().startsWith(p)
+					)
+				) {
+					alert('Unsupported image format');
+					setUploading(false);
+					return;
+				}
+
 				onChange(base64String);
 				setUploading(false);
 			};
+
 			reader.onerror = () => {
 				alert('Error reading file');
 				setUploading(false);
 			};
+
 			reader.readAsDataURL(file);
 		} catch (error) {
 			console.error('Error uploading image:', error);
@@ -56,8 +106,15 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (
 	};
 
 	const handleRemove = () => {
+		// Revoke blob preview if present
+		if (lastBlobPreviewRef.current) {
+			URL.revokeObjectURL(lastBlobPreviewRef.current);
+			lastBlobPreviewRef.current = null;
+		}
+
 		setPreview(null);
 		onChange('');
+
 		if (fileInputRef.current) {
 			fileInputRef.current.value = '';
 		}
@@ -90,10 +147,17 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (
 					<img
 						src={preview}
 						alt='Preview'
+						// defense-in-depth: avoid sending referrer to arbitrary user URLs
+						referrerPolicy='no-referrer'
+						loading='lazy'
 						style={{
 							width: '100%',
 							height: 'auto',
 							display: 'block',
+						}}
+						onError={() => {
+							// If the URL is invalid/broken, don’t keep trying to render it
+							setPreview(null);
 						}}
 					/>
 					<button
@@ -158,8 +222,14 @@ export const ImageUploadField: CustomFieldRender<string | undefined> = (
 			<input
 				type='text'
 				value={value || ''}
-				onChange={(e) => onChange(e.target.value)}
-				placeholder='Or enter image URL'
+				onChange={(e) => {
+					const raw = e.target.value;
+					const safe = sanitizeImageSrc(raw);
+
+					// Persist only safe URLs/data URLs; otherwise store empty (or keep raw if you prefer).
+					onChange(safe ?? '');
+				}}
+				placeholder='Or enter image URL (http/https only)'
 				style={{
 					width: '100%',
 					padding: '8px 12px',

@@ -63,8 +63,8 @@ const DataSourceFieldRender = (
 			</label>
 			<div style={{ display: 'flex', gap: '8px' }}>
 				<input
-					type="text"
-					placeholder="https://api.example.com/products"
+					type='text'
+					placeholder='https://api.example.com/products'
 					style={{
 						flex: 1,
 						padding: '8px 12px',

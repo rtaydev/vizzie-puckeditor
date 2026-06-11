@@ -112,7 +112,7 @@ const ContactOneInner: ComponentConfig<ContactOneProps> = {
 			if (!iconName) return null;
 			const IconComponent = (LucideIcons as any)[iconName];
 			if (!IconComponent) return null;
-			return <IconComponent className="size-6" />;
+			return <IconComponent className='size-6' />;
 		};
 
 		return (
