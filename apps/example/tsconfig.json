@@ -20,7 +20,7 @@
 		],
 		"paths": {
 			"@/*": ["./*"],
-			"@puck-editor/visual/*": ["../packages/visual/src/*"]
+			"@rtaydev/vizzie-editor/*": ["../packages/visual/src/*"]
 		}
 	},
 	"include": [

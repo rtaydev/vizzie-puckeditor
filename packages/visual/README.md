@@ -1,6 +1,45 @@
-# @puck-editor/visual
+# @rtaydev/vizzie-editor
+
+> ⚠️ **Package Name Change**: This package has been renamed from `@puck-editor/visual` to `@rtaydev/vizzie-editor`. The old package is deprecated. Please update your dependencies and imports to use `@rtaydev/vizzie-editor`.
 
 A modern, customizable visual editor component for Next.js built on top of [@measured/puck](https://puck.sh). Features a beautiful theme editor, drag-and-drop interface, and flexible layout options.
+
+## Migration from @puck-editor/visual
+
+If you're currently using `@puck-editor/visual`, please migrate to `@rtaydev/vizzie-editor`:
+
+1. **Update your package.json:**
+   ```bash
+   npm uninstall @puck-editor/visual
+   npm install @rtaydev/vizzie-editor @measured/puck react react-dom
+   ```
+   or with pnpm:
+   ```bash
+   pnpm remove @puck-editor/visual
+   pnpm add @rtaydev/vizzie-editor @measured/puck react react-dom
+   ```
+
+2. **Update all imports in your code:**
+   ```diff
+   - import { PuckEditor } from '@puck-editor/visual';
+   - import '@puck-editor/visual/styles.css';
+   + import { PuckEditor } from '@rtaydev/vizzie-editor';
+   + import '@rtaydev/vizzie-editor/styles.css';
+   ```
+
+3. **Update Next.js config** (if using `transpilePackages`):
+   ```diff
+   - transpilePackages: ['@puck-editor/visual'],
+   + transpilePackages: ['@rtaydev/vizzie-editor'],
+   ```
+
+4. **Update TypeScript paths** (if configured):
+   ```diff
+   - "@puck-editor/visual/*": ["../packages/visual/src/*"]
+   + "@rtaydev/vizzie-editor/*": ["../packages/visual/src/*"]
+   ```
+
+The API and functionality remain exactly the same - only the package name has changed.
 
 ## Features
 
@@ -16,16 +55,18 @@ A modern, customizable visual editor component for Next.js built on top of [@mea
 
 [![bhpaQ.gif](https://s12.gifyu.com/images/bhpaQ.gif)](https://gifyu.com/image/bhpaQ)
 
+**Live Demo:** [Try it out →](https://vizzie-puckeditor-example-963qv3jeq-rtayprods-projects.vercel.app/)
+
 ## Installation
 
 ```bash
-npm install @puck-editor/visual @measured/puck react react-dom
+npm install @rtaydev/vizzie-editor @measured/puck react react-dom
 ```
 
 or with pnpm:
 
 ```bash
-pnpm add @puck-editor/visual @measured/puck react react-dom
+pnpm add @rtaydev/vizzie-editor @measured/puck react react-dom
 ```
 
 ## Quick Start
@@ -37,8 +78,8 @@ Create a page component that uses the editor:
 ```tsx
 'use client';
 
-import { PuckEditor } from '@puck-editor/visual';
-import '@puck-editor/visual/styles.css';
+import { PuckEditor } from '@rtaydev/vizzie-editor';
+import '@rtaydev/vizzie-editor/styles.css';
 import { useState } from 'react';
 
 export default function EditorPage() {
@@ -87,7 +128,7 @@ interface PuckOptions {
 Customize colors, typography, spacing, and more:
 
 ```tsx
-import { PuckEditor, defaultPuckTheme } from '@puck-editor/visual';
+import { PuckEditor, defaultPuckTheme } from '@rtaydev/vizzie-editor';
 
 <PuckEditor
 	data={data}
@@ -169,8 +210,8 @@ Users can customize the theme in real-time using the built-in Theme Editor (acce
 To render content created with the editor on your frontend:
 
 ```tsx
-import { PuckRenderer } from '@puck-editor/visual';
-import '@puck-editor/visual/styles.css';
+import { PuckRenderer } from '@rtaydev/vizzie-editor';
+import '@rtaydev/vizzie-editor/styles.css';
 
 export default function ViewPage() {
 	const [data] = useState(/* your saved data */);
@@ -194,8 +235,8 @@ export default function ViewPage() {
 
 ```tsx
 // Main components
-export { PuckEditor } from '@puck-editor/visual';
-export { PuckRenderer } from '@puck-editor/visual';
+export { PuckEditor } from '@rtaydev/vizzie-editor';
+export { PuckRenderer } from '@rtaydev/vizzie-editor';
 
 // Types
 export type {
@@ -207,10 +248,10 @@ export type {
 };
 
 // Utilities
-export { createPuckConfig } from '@puck-editor/visual';
-export { defaultPuckTheme } from '@puck-editor/visual';
-export { applyTheme, generateThemeCSS, mergeThemes } from '@puck-editor/visual';
-export { ColorPickerField, ImageUploadField } from '@puck-editor/visual';
+export { createPuckConfig } from '@rtaydev/vizzie-editor';
+export { defaultPuckTheme } from '@rtaydev/vizzie-editor';
+export { applyTheme, generateThemeCSS, mergeThemes } from '@rtaydev/vizzie-editor';
+export { ColorPickerField, ImageUploadField } from '@rtaydev/vizzie-editor';
 ```
 
 ### Theme Utilities
@@ -240,7 +281,7 @@ When `enableLocalStorage` is enabled:
 The editor uses pre-built blocks. To extend with custom blocks, use the `createPuckConfig` function to define your own components:
 
 ```tsx
-import { createPuckConfig, PuckEditor } from '@puck-editor/visual';
+import { createPuckConfig, PuckEditor } from '@rtaydev/vizzie-editor';
 
 export default function Editor() {
 	const config = createPuckConfig({
@@ -266,8 +307,8 @@ export default function Editor() {
 ```tsx
 'use client';
 
-import { PuckEditor } from '@puck-editor/visual';
-import '@puck-editor/visual/styles.css';
+import { PuckEditor } from '@rtaydev/vizzie-editor';
+import '@rtaydev/vizzie-editor/styles.css';
 import { useState } from 'react';
 
 export default function EditorPage() {
@@ -306,7 +347,7 @@ export default function EditorPage() {
 The package includes default styles. Import them in your app:
 
 ```tsx
-import '@puck-editor/visual/styles.css';
+import '@rtaydev/vizzie-editor/styles.css';
 ```
 
 To customize editor styling, use CSS modules or override CSS variables.

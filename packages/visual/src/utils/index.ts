@@ -76,3 +76,50 @@ const getClassNameFactory =
 	};
 
 export { getClassNameFactory };
+
+// Image upload constants
+export const MAX_BYTES = 10 * 1024 * 1024; // 10MB
+
+export const SAFE_DATA_IMAGE_PREFIXES = [
+	'data:image/png;base64,',
+	'data:image/jpeg;base64,',
+	'data:image/jpg;base64,',
+	'data:image/gif;base64,',
+	'data:image/webp;base64,',
+];
+
+/**
+ * Sanitize image source to prevent XSS attacks.
+ * Only allows:
+ * - data: URLs with safe image MIME types and base64 encoding
+ * - http:// and https:// URLs
+ */
+export const sanitizeImageSrc = (src?: string): string | null => {
+	if (!src || typeof src !== 'string') {
+		return null;
+	}
+
+	const trimmed = src.trim().toLowerCase();
+
+	// Allow safe data URLs
+	if (trimmed.startsWith('data:')) {
+		const isSafe = SAFE_DATA_IMAGE_PREFIXES.some((prefix) =>
+			trimmed.startsWith(prefix)
+		);
+		return isSafe ? src : null;
+	}
+
+	// Allow http(s) URLs
+	if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+		try {
+			// Basic validation: ensure it's a valid URL
+			new URL(src);
+			return src;
+		} catch {
+			return null;
+		}
+	}
+
+	// Block blob: URLs and everything else
+	return null;
+};
