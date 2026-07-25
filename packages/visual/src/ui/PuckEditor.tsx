@@ -223,10 +223,18 @@ export const PuckEditor = ({
 	return (
 		<div style={rootStyle} className={themeClassName}>
 			{customCss && (
-				<style
-					dangerouslySetInnerHTML={{
-						__html: customCss,
-					}}
+			<style
+				dangerouslySetInnerHTML={{
+					__html: (() => {
+						const parser = new DOMParser();
+						const doc = parser.parseFromString(
+							`<script>/*\n${customCss}\n*/</script>`,
+							"text/html"
+						);
+						const script = doc.querySelector("script");
+						return script ? script.textContent || "" : "";
+					})(),
+				}}
 				/>
 			)}
 			{!showPreview ? (
